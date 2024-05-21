@@ -9,14 +9,14 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <header>
+        <header className="header">
           <Navabar />
         </header>
         <main className="main-container-app">
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </main>
       </div>

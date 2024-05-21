@@ -1,0 +1,31 @@
+.nav-container {
+  display: flex;
+  /* background-color: #fffeee; */
+  height: 50px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #e6e6e6;
+  padding: 30px 20px 45px 20px;
+  width: 60%;
+}
+
+.links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-button-list {
+  list-style-type: none;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link,
+.logo {
+  text-decoration: none;
+  color: #222831;
+}
