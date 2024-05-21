@@ -8,8 +8,13 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: #222831;
   background-color: #fffeee;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .header {
@@ -20,5 +25,24 @@ body {
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  min-height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  /* background-color: green; */
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  /* background-color: blue; */
 }

@@ -11,12 +11,12 @@ export default function Navabar() {
       <ul className="links">
         <li className="nav-button-list">
           <NavLink to={"/login"} className="nav-link">
-            <FaUser /> Login
+            <FaSignInAlt /> Login
           </NavLink>
         </li>
         <li className="nav-button-list">
           <NavLink to={"/register"} className="nav-link">
-            <FaSignInAlt /> Register
+            <FaUser /> Register
           </NavLink>
         </li>
       </ul>
