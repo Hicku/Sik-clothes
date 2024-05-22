@@ -48,4 +48,18 @@ body {
 }
 
 .btn {
+  font-family: "Poppins", sans-serif;
+  padding: 6px 13px;
+  border: 1px solid #222831;
+  border-radius: 5px;
+  background: #222831;
+  color: #fffeee;
+  font-size: 14px;
+  font-weight: 550;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

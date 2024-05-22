@@ -11,6 +11,8 @@
 
 .links {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 15px;
 }
 
@@ -26,6 +28,9 @@
 
 .nav-link,
 .logo {
+  font-family: "Poppins", sans-serif;
   text-decoration: none;
   color: #222831;
+  font-weight: 600;
+  font-size: 15px;
 }
