@@ -1,6 +1,10 @@
 import "./login.css";
 
 function Login() {
+  const loginUser = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="login-container">
       <div className="login-header">
@@ -8,7 +12,7 @@ function Login() {
       </div>
       <form className="login-form">
         <div className="input-container">
-          <label for="email">Email</label>
+          <label htmlFor="email">Email</label>
           <input
             type="email"
             id="email"
@@ -17,7 +21,7 @@ function Login() {
           />
         </div>
         <div className="input-container">
-          <label for="password">Password</label>
+          <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
@@ -25,7 +29,7 @@ function Login() {
             className="login-input"
           />
         </div>
-        <button type="submit" className="login-button">
+        <button type="submit" className="btn">
           Login
         </button>
       </form>
