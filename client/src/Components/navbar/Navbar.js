@@ -17,38 +17,51 @@ export default function Navabar() {
 
   return (
     <nav className="nav-container">
-      <NavLink to={"/"} className="logo">
-        Logo
-      </NavLink>
-      <ul className="links">
-        {user ? (
-          <>
-            <li className="nav-button-list">
-              <NavLink to={"/profile"} className="nav-link">
-                Profile
-              </NavLink>
-            </li>
-            <li className="nav-button-list">
-              <button className="btn" onClick={onLogout}>
-                <FaSignOutAlt /> Logout
-              </button>
-            </li>
-          </>
-        ) : (
-          <>
-            <li className="nav-button-list">
-              <NavLink to={"/login"} className="nav-link">
-                <FaSignInAlt /> Login
-              </NavLink>
-            </li>
-            <li className="nav-button-list">
-              <NavLink to={"/register"} className="nav-link">
-                <FaUser /> Register
-              </NavLink>
-            </li>
-          </>
-        )}
-      </ul>
+      <section className="nav-btn-container">
+        <NavLink to={"/"} className="logo">
+          Logo
+        </NavLink>
+        <ul className="links">
+          {user ? (
+            <>
+              <li className="nav-button-list">
+                <NavLink to={"/profile"} className="nav-link">
+                  Profile
+                </NavLink>
+              </li>
+              <li className="nav-button-list">
+                <button className="btn" onClick={onLogout}>
+                  <FaSignOutAlt /> Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <>
+              <li className="nav-button-list">
+                <NavLink to={"/login"} className="nav-link">
+                  <FaSignInAlt /> Login
+                </NavLink>
+              </li>
+              <li className="nav-button-list">
+                <NavLink to={"/register"} className="nav-link">
+                  <FaUser /> Register
+                </NavLink>
+              </li>
+            </>
+          )}
+        </ul>
+      </section>
+      <section className="nav-search-container">
+        <input
+          type="search"
+          id="search"
+          name="search"
+          // value={email}
+          // onChange={onChange}
+          placeholder="Search"
+          className="search-input"
+        />
+      </section>
     </nav>
   );
 }

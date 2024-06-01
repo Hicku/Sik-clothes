@@ -4,13 +4,15 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  color: #153250;
 }
 
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   color: #222831;
-  background-color: #fffeee;
+  background-color: #fefcff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

@@ -1,0 +1,14 @@
+.hompage-container {
+  display: flex;
+}
+
+.product-list {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.product-list-item {
+  list-style: none;
+}

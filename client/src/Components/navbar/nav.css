@@ -1,12 +1,22 @@
 .nav-container {
   display: flex;
+  flex-direction: column;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 20px 45px 20px;
+  width: 75%;
+}
+
+.nav-btn-container {
+  display: flex;
   /* background-color: #fffeee; */
   height: 50px;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #e6e6e6;
   padding: 30px 20px 45px 20px;
-  width: 60%;
+  width: 100%;
 }
 
 .links {
@@ -30,7 +40,11 @@
 .logo {
   font-family: "Poppins", sans-serif;
   text-decoration: none;
-  color: #222831;
   font-weight: 600;
   font-size: 15px;
+}
+
+.nav-search-container {
+  background-color: #970c10;
+  width: 100%;
 }

@@ -31,23 +31,21 @@ function Homepage() {
 
   return (
     <>
-      <section>
-        <p>Start Shopping</p>
-      </section>
-
-      <section>
-        {products.length > 0 ? (
-          <ul>
-            {products.map((product) => (
-              <li>
-                <Product key={product._id} product={product} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <h3>No products to display</h3>
-        )}
-      </section>
+      <div className="homepage-cotainer">
+        <section>
+          {products.length > 0 ? (
+            <ul className="product-list">
+              {products.map((product) => (
+                <li className="product-list-item">
+                  <Product key={product._id} product={product} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <h3>No products to display</h3>
+          )}
+        </section>
+      </div>
     </>
   );
 }
