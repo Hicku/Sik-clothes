@@ -10,7 +10,9 @@ const User = require("../model/userModel");
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
+  // Check for email and password fields
   if (!email || !password) {
+    // Return server error
     res.status(400);
     throw new Error("Please fill in all fields");
   }
@@ -18,7 +20,9 @@ const loginUser = asyncHandler(async (req, res) => {
   // Check if user exists
   const user = await User.findOne({ email });
 
+  // Check if user exists and password is correct
   if (user && (await bcrypt.compare(password, user.password))) {
+    // Return user data
     res.json({
       _id: user._id,
       name: user.name,
@@ -26,10 +30,12 @@ const loginUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
+    //Return not authorized
     res.status(401);
     throw new Error("Invalid email or password");
   }
 
+  // Return success message
   res.json({
     message: "User logged in successfully",
   });
@@ -56,6 +62,7 @@ const getMe = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
+  // Check for name, email and password fields
   if (!name || !email || !password) {
     res.status(400);
     throw new Error("Please fill in all fields");
@@ -64,6 +71,7 @@ const registerUser = asyncHandler(async (req, res) => {
   // Check if user already exists
   const userExists = await User.findOne({ email });
 
+  // Return error if user exists
   if (userExists) {
     res.status(400);
     throw new Error("User already exists");
@@ -80,6 +88,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password: hashedPassword,
   });
 
+  // Return user data
   if (user) {
     res.status(201).json({
       _id: user._id,
@@ -88,10 +97,12 @@ const registerUser = asyncHandler(async (req, res) => {
       token: generateToken(user._id),
     });
   } else {
+    // Return server error
     res.status(400);
     throw new Error("Invalid user data");
   }
 
+  // Return success message
   res.json({
     message: "User registered successfully",
   });

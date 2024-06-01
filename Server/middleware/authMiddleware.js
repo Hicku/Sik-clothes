@@ -6,6 +6,7 @@ const protect = asyncHandler(async (req, res, next) => {
   let token;
 
   if (
+    // check if token is in header and starts with Bearer
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
@@ -16,7 +17,6 @@ const protect = asyncHandler(async (req, res, next) => {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       // get user from token
       req.user = await User.findById(decoded.id).select("-password");
-
       next();
     } catch (error) {
       console.error(error);
@@ -30,5 +30,7 @@ const protect = asyncHandler(async (req, res, next) => {
     throw new Error("Not authorized, bo token");
   }
 });
+
+const admin = (req, res, next) => {};
 
 module.exports = { protect };

@@ -2,7 +2,7 @@ import { FaSignInAlt, FaUser, FaSignOutAlt } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./nav.css";
 import { useSelector, useDispatch } from "react-redux";
-import { logout, reset } from "../../features/authSlice";
+import { logout, reset } from "../../features/auth/authSlice";
 
 export default function Navabar() {
   const navigate = useNavigate();

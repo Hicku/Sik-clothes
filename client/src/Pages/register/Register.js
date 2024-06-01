@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { register, reset } from "../../features/authSlice";
+import { register, reset } from "../../features/auth/authSlice";
 import Spinner from "../../Components/navbar/spinner/spinner";
 
 function Register() {
@@ -28,7 +28,7 @@ function Register() {
       toast.error(message);
     }
 
-    if (isSuccess) {
+    if (isSuccess || user) {
       toast.success(message);
       navigate("/");
     }
