@@ -7,8 +7,6 @@ const port = process.env.PORT || 5000;
 const { errorHandler } = require("./middleware/errorMiddleware");
 const ProductModel = require("./model/productModel");
 
-//
-
 connectDB();
 
 const app = express();

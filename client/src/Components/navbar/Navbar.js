@@ -17,6 +17,7 @@ export default function Navabar() {
 
   return (
     <nav className="nav-container">
+      <div className="top-bar"></div>
       <section className="nav-btn-container">
         <NavLink to={"/"} className="logo">
           Logo
@@ -34,6 +35,7 @@ export default function Navabar() {
                   <FaSignOutAlt /> Logout
                 </button>
               </li>
+              <li>search</li>
             </>
           ) : (
             <>
@@ -47,20 +49,10 @@ export default function Navabar() {
                   <FaUser /> Register
                 </NavLink>
               </li>
+              <li>search</li>
             </>
           )}
         </ul>
-      </section>
-      <section className="nav-search-container">
-        <input
-          type="search"
-          id="search"
-          name="search"
-          // value={email}
-          // onChange={onChange}
-          placeholder="Search"
-          className="search-input"
-        />
       </section>
     </nav>
   );

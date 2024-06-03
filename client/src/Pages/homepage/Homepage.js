@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, reset } from "../../features/products/productSlice";
 import Product from "../../Components/productCard/Product";
+import CatergoryBar from "../../Components/categoryBar/categoryBar";
 import "./homepage.css";
 
 function Homepage() {
@@ -32,6 +33,9 @@ function Homepage() {
   return (
     <>
       <div className="homepage-cotainer">
+        <section>
+          <CatergoryBar />
+        </section>
         <section>
           {products.length > 0 ? (
             <ul className="product-list">

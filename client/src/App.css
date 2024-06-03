@@ -5,13 +5,13 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  color: #153250;
+  color: #454545;
 }
 
 body {
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  color: #222831;
+  color: #454545;
   background-color: #fefcff;
   min-height: 100vh;
   display: flex;
@@ -23,7 +23,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px 50px;
+  /* padding: 20px 50px; */
 }
 
 .App {
@@ -47,21 +47,4 @@ body {
   align-items: center;
   flex-grow: 1;
   /* background-color: blue; */
-}
-
-.btn {
-  font-family: "Poppins", sans-serif;
-  padding: 6px 13px;
-  border: 1px solid #222831;
-  border-radius: 5px;
-  background: #222831;
-  color: #fffeee;
-  font-size: 14px;
-  font-weight: 550;
-  cursor: pointer;
-  text-align: center;
-  appearance: button;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }

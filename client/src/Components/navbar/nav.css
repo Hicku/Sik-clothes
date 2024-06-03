@@ -1,22 +1,25 @@
+.top-bar {
+  background-color: #454545;
+  height: 35px;
+  width: 100%;
+}
+
 .nav-container {
   display: flex;
   flex-direction: column;
-  height: 50px;
   justify-content: center;
   align-items: center;
-  padding: 30px 20px 45px 20px;
-  width: 75%;
+  width: 100%;
 }
 
 .nav-btn-container {
   display: flex;
-  /* background-color: #fffeee; */
-  height: 50px;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e6e6e6;
-  padding: 30px 20px 45px 20px;
-  width: 100%;
+  padding: 0px 20px 0px 20px;
+  border-bottom: 1px solid #454545;
+  width: 93%;
+  height: 100px;
 }
 
 .links {
@@ -37,14 +40,20 @@
 }
 
 .nav-link,
-.logo {
+.logo,
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  all: unset;
   font-family: "Poppins", sans-serif;
   text-decoration: none;
   font-weight: 600;
   font-size: 15px;
+  cursor: pointer;
 }
 
-.nav-search-container {
-  background-color: #970c10;
-  width: 100%;
+.cat-list {
+  background-color: #636363;
+  width: 93%;
 }
