@@ -12,4 +12,14 @@ const getProducts = asyncHandler(async (req, res) => {
   res.json(products);
 });
 
-module.exports = { getProducts };
+const getCategory = asyncHandler(async (req, res) => {
+  const { category } = req.query;
+  if (!category) {
+    return res.status(400).json({ message: "Category parameter is missing" });
+  }
+
+  const products = await Product.find({ category: category });
+  res.json(products);
+});
+
+module.exports = { getProducts, getCategory };

@@ -8,8 +8,15 @@ const getProducts = async () => {
   return response.data;
 };
 
+const getCategory = async (category) => {
+  const response = await axios.get(`${API_URL}/category?category=${category}`);
+
+  return response.data;
+};
+
 const productService = {
   getProducts,
+  getCategory,
 };
 
 export default productService;
