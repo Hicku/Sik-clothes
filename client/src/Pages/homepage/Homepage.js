@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, reset } from "../../features/products/productSlice";
 import Product from "../../Components/productCard/Product";
-import CatergoryBar from "../../Components/categoryBar/categoryBar";
+import CategoryBar from "../../Components/categoryBar/categoryBar";
 import "./homepage.css";
 
 function Homepage() {
@@ -34,7 +34,7 @@ function Homepage() {
     <>
       <div className="homepage-cotainer">
         <section>
-          <CatergoryBar />
+          <CategoryBar />
         </section>
         <section>
           {products.length > 0 ? (
