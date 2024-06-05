@@ -4,21 +4,38 @@
   right: 0;
   top: 0;
   width: 21%;
+  min-width: 400px;
   height: 100%;
   overflow: auto;
   background-color: #313c44;
   overflow: hidden;
   white-space: nowrap;
-  animation: slideModal 0.1s linear 1;
 }
 
-@keyframes slideModal {
+@keyframes slideModalIn {
   0% {
     transform: translateX(100%);
   }
   100% {
     transform: translateX(0);
   }
+}
+
+@keyframes slideModalOut {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.search-modal-container.open {
+  animation: slideModalIn 0.1s linear 1 forwards;
+}
+
+.search-modal-container.close {
+  animation: slideModalOut 0.1s linear 1 forwards;
 }
 
 .search-container {

@@ -7,10 +7,7 @@ function SearchModal({ isOpen, setIsOpen }) {
   };
 
   return (
-    <div
-      className="search-modal-container"
-      style={{ display: isOpen ? "block" : "none" }}
-    >
+    <div className={`search-modal-container ${isOpen ? "open" : "close"}`}>
       <div className="x-button-container">
         <IoMdClose onClick={handleSearch} className="x-button" />
       </div>
