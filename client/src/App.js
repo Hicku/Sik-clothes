@@ -4,6 +4,7 @@ import Homepage from "./Pages/homepage/Homepage";
 import Login from "./Pages/login/Login";
 import Register from "./Pages/register/Register";
 import Navabar from "./Components/navbar/Navbar";
+import ProductPage from "./Pages/productPage/ProductPage";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +12,7 @@ import "./App.css";
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState({});
 
   return (
     <>
@@ -30,7 +32,13 @@ function App() {
                 />
                 <Route
                   path="/"
-                  element={<Homepage isOpen={isOpen} setIsOpen={setIsOpen} />}
+                  element={
+                    <Homepage
+                      isOpen={isOpen}
+                      setIsOpen={setIsOpen}
+                      setSelectedProduct={setSelectedProduct}
+                    />
+                  }
                 />
                 <Route
                   path="/login"
@@ -39,6 +47,16 @@ function App() {
                 <Route
                   path="/register"
                   element={<Register isOpen={isOpen} setIsOpen={setIsOpen} />}
+                />
+                <Route
+                  path="/product"
+                  element={
+                    <ProductPage
+                      isOpen={isOpen}
+                      setIsOpen={setIsOpen}
+                      selectedProduct={selectedProduct}
+                    />
+                  }
                 />
               </Routes>
             </main>

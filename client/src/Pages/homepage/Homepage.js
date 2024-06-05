@@ -3,11 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProducts, reset } from "../../features/products/productSlice";
 import Product from "../../Components/productCard/Product";
-import CategoryBar from "../../Components/categoryBar/categoryBar";
 import "./homepage.css";
 import SearchModal from "../../Components/searchModal/SearchModal";
 
-function Homepage({ isOpen, setIsOpen }) {
+function Homepage({ isOpen, setIsOpen, setSelectedProduct }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -32,24 +31,25 @@ function Homepage({ isOpen, setIsOpen }) {
   }
 
   return (
-    <>
-      <div className="homepage-cotainer">
+    <div className="homepage-container">
+      <div className="data-cotainer">
         <section>
-          <CategoryBar />
-        </section>
-        <section>
-          <div className="main-search-container">
+          <div className="data">
             <div>
               {products.length > 0 ? (
                 <ul className="product-list">
                   {products.map((product) => (
                     <li className="product-list-item">
-                      <Product key={product._id} product={product} />
+                      <Product
+                        key={product._id}
+                        product={product}
+                        setSelectedProduct={setSelectedProduct}
+                      />
                     </li>
                   ))}
                 </ul>
               ) : (
-                <h3>No products to display</h3>
+                <p></p>
               )}
             </div>
             <div>
@@ -58,7 +58,7 @@ function Homepage({ isOpen, setIsOpen }) {
           </div>
         </section>
       </div>
-    </>
+    </div>
   );
 }
 

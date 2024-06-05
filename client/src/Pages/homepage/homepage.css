@@ -1,6 +1,7 @@
-.hompage-container {
+/* .hompage-container {
   display: flex;
-}
+  justify-content: space-between;
+} */
 
 .product-list {
   display: flex;

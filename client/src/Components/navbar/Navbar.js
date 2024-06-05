@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "./nav.css";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../features/auth/authSlice";
+import CategoryBar from "../categoryBar/categoryBar";
 
 export default function Navabar({ isOpen, setIsOpen }) {
   const navigate = useNavigate();
@@ -63,6 +64,11 @@ export default function Navabar({ isOpen, setIsOpen }) {
             </>
           )}
         </ul>
+      </section>
+      <section>
+        <section className="category-container">
+          <CategoryBar />
+        </section>
       </section>
     </nav>
   );
