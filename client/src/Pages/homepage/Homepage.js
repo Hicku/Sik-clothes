@@ -5,8 +5,9 @@ import { getProducts, reset } from "../../features/products/productSlice";
 import Product from "../../Components/productCard/Product";
 import CategoryBar from "../../Components/categoryBar/categoryBar";
 import "./homepage.css";
+import SearchModal from "../../Components/searchModal/SearchModal";
 
-function Homepage() {
+function Homepage({ isOpen, setIsOpen }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -37,17 +38,24 @@ function Homepage() {
           <CategoryBar />
         </section>
         <section>
-          {products.length > 0 ? (
-            <ul className="product-list">
-              {products.map((product) => (
-                <li className="product-list-item">
-                  <Product key={product._id} product={product} />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <h3>No products to display</h3>
-          )}
+          <div className="main-search-container">
+            <div>
+              {products.length > 0 ? (
+                <ul className="product-list">
+                  {products.map((product) => (
+                    <li className="product-list-item">
+                      <Product key={product._id} product={product} />
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <h3>No products to display</h3>
+              )}
+            </div>
+            <div>
+              <SearchModal isOpen={isOpen} setIsOpen={setIsOpen} />
+            </div>
+          </div>
         </section>
       </div>
     </>

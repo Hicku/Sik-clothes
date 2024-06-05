@@ -4,7 +4,7 @@ import "./nav.css";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../features/auth/authSlice";
 
-export default function Navabar() {
+export default function Navabar({ isOpen, setIsOpen }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -15,9 +15,15 @@ export default function Navabar() {
     navigate("/");
   };
 
+  const handleSearch = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <nav className="nav-container">
-      <div className="top-bar"></div>
+      <div className="top-bar">
+        <div className="banner">£10 off orders over £70</div>
+      </div>
       <section className="nav-btn-container">
         <NavLink to={"/"} className="logo">
           Logo
@@ -35,7 +41,9 @@ export default function Navabar() {
                   <FaSignOutAlt /> Logout
                 </button>
               </li>
-              <li>search</li>
+              <button className="search-button" onClick={handleSearch}>
+                search
+              </button>
             </>
           ) : (
             <>
@@ -49,7 +57,9 @@ export default function Navabar() {
                   <FaUser /> Register
                 </NavLink>
               </li>
-              <li>search</li>
+              <button className="search-button" onClick={handleSearch}>
+                search
+              </button>
             </>
           )}
         </ul>

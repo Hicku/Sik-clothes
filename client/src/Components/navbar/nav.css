@@ -1,7 +1,36 @@
 .top-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #454545;
   height: 35px;
   width: 100%;
+}
+
+/* .banner {
+  color: aliceblue;
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: all 2s ease;
+} */
+
+.banner {
+  color: aliceblue;
+  overflow: hidden; /* Ensures the text doesn't overflow */
+  white-space: nowrap; /* Prevents the text from wrapping */
+  animation: scrollText 10s linear 1; /* Animation properties */
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 .nav-container {
@@ -41,7 +70,8 @@
 
 .nav-link,
 .logo,
-.btn {
+.btn,
+.search-button {
   display: flex;
   justify-content: center;
   align-items: center;
