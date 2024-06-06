@@ -9,12 +9,43 @@ function ProductPage({ isOpen, setIsOpen, selectedProduct }) {
       </section>
       <section className="product-details-container">
         <div className="product-details">
-          <div></div>
-          <h2>{selectedProduct.title}</h2>
-          <p>£{selectedProduct.price}</p>
+          <div className="title-container">
+            <h2 className="product-title">{selectedProduct.title}</h2>
+          </div>
+          <div className="price-container">
+            <p className="product-price">£{selectedProduct.price}</p>
+          </div>
+          <div className="size">Size: 10</div>
+          <div>
+            <ul className="size-list">
+              <li>
+                <button>6</button>
+              </li>
+              <li>
+                <button>8</button>
+              </li>
+              <li>
+                <button>10</button>
+              </li>
+              <li>
+                <button>12</button>
+              </li>
+              <li>
+                <button>14</button>
+              </li>
+              <li>
+                <button>16</button>
+              </li>
+            </ul>
+          </div>
+          <div className="cart-wish-buttons">
+            <button className="cart-btn">Add to cart</button>
+            <button>Add to wishlist</button>
+          </div>
+        </div>
+        <div className="description-container">
+          <h3>Description</h3>
           <p>{selectedProduct.description}</p>
-
-          <button>Add to cart</button>
         </div>
       </section>
     </div>
