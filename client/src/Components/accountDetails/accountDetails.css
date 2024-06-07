@@ -1,0 +1,80 @@
+.account-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 1px solid #b7b7b7;
+  width: 60%;
+}
+
+.account-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.login-details {
+  border-bottom: 1px solid #b7b7b7;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 30px;
+}
+
+.details-titles {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  flex-grow: 2;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.email-password {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  flex-grow: 3;
+  width: 100%;
+  padding-top: 10px;
+}
+
+.email-password label {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.email-password input {
+  height: 30%;
+  width: 93%;
+  padding-left: 5px;
+}
+
+.email-password div {
+  margin-top: 5px;
+  text-decoration-line: underline;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.personal-details {
+  display: flex;
+  flex-grow: 3;
+  background-color: greenyellow;
+  width: 100%;
+}
+
+.personal-details input {
+  height: 10%;
+}
+
+.delete-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: brown;
+}

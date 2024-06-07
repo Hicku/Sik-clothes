@@ -8,7 +8,7 @@ import OrderHistory from "../../Components/orderHistory/OrderHistory";
 import PaymentDetails from "../../Components/paymentDetails/PaymentDetails";
 import Wishlist from "../../Components/wishlist/Wishlist";
 
-function profile() {
+function Profile() {
   const userData = JSON.parse(localStorage.getItem("user"));
 
   return (
@@ -45,17 +45,11 @@ function profile() {
         </ul>
       </section>
       <section className="details-container">
-        <Account />
-        {/* <OrderHistory />
-        <Wishlist />
+        {/* <Account /> */}
         <AccountDetails />
-        <ChangePassword />
-        <Contact />
-        <AddressDetails />
-        <PaymentDetails /> */}
       </section>
     </div>
   );
 }
 
-export default profile;
+export default Profile;
