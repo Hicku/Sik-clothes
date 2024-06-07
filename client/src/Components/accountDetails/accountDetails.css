@@ -11,6 +11,7 @@
   flex-direction: column;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
 .login-details {
@@ -19,7 +20,7 @@
   flex-grow: 1;
   flex-direction: column;
   width: 100%;
-  padding-left: 30px;
+  padding: 0px 0px 20px 30px;
 }
 
 .details-titles {
@@ -30,6 +31,17 @@
   flex-grow: 2;
   width: 100%;
   margin-top: 20px;
+}
+
+.account-details button {
+  width: 93%;
+  margin-top: 10px;
+  height: 40px;
+  background-color: #454545;
+  color: #fefcff;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .email-password {
@@ -48,7 +60,7 @@
 }
 
 .email-password input {
-  height: 30%;
+  height: 40px;
   width: 93%;
   padding-left: 5px;
 }
@@ -62,13 +74,50 @@
 
 .personal-details {
   display: flex;
+  flex-direction: column;
   flex-grow: 3;
-  background-color: greenyellow;
+  width: 100%;
+  padding-top: 20px;
+}
+
+h2 {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.personal-title {
+  margin-left: 30px;
+}
+
+.personal-details div {
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
   width: 100%;
 }
 
 .personal-details input {
-  height: 10%;
+  display: flex;
+  height: 40px;
+  padding-left: 5px;
+  width: 93%;
+  margin-bottom: 10px;
+}
+
+.personal-details form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.personal-details label {
+  display: flex;
+  justify-content: start;
+  font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .delete-container {

@@ -26,7 +26,9 @@ const loginUser = asyncHandler(async (req, res) => {
     res.json({
       _id: user._id,
       name: user.name,
+      lastName: user.lastName,
       email: user.email,
+      dateOfBirth: user.dateOfBirth,
       token: generateToken(user._id),
     });
   } else {
@@ -60,10 +62,10 @@ const getMe = asyncHandler(async (req, res) => {
 // access: Public
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, lastName, email, dateOfBirth, password } = req.body;
 
   // Check for name, email and password fields
-  if (!name || !email || !password) {
+  if (!name || !lastName || !email || !dateOfBirth || !password) {
     res.status(400);
     throw new Error("Please fill in all fields");
   }
@@ -84,7 +86,9 @@ const registerUser = asyncHandler(async (req, res) => {
   //Create user
   const user = await User.create({
     name,
+    lastName,
     email,
+    dateOfBirth,
     password: hashedPassword,
   });
 
@@ -93,7 +97,9 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(201).json({
       _id: user._id,
       name: user.name,
+      lastName: user.lastName,
       email: user.email,
+      dateOfBirth: user.dateOfBirth,
       token: generateToken(user._id),
     });
   } else {
