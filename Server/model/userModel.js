@@ -16,11 +16,8 @@ const userSchema = new mongoose.Schema(
       unique: true,
     },
     dateOfBirth: {
-      type: Date,
+      type: String,
       required: [true, "Please provide a date of birth"],
-      get: function (val) {
-        return new Date(val).toLocaleDateString("en-GB");
-      },
     },
     password: {
       type: String,

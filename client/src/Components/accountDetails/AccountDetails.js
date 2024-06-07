@@ -11,11 +11,6 @@ function AccountDetails() {
     dateOfBirth: user.dateOfBirth,
   });
 
-  function formatDate(dateString) {
-    const [year, month, day] = dateString.split("-");
-    return `${day}-${month}-${year}`;
-  }
-
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -33,7 +28,7 @@ function AccountDetails() {
           </div>
           <div className="email-password">
             <label>Email</label>
-            <input type="email" value={user.email} />
+            <input type="email" value={user.email} readOnly />
             <div>Change Password</div>
           </div>
         </div>
@@ -61,7 +56,7 @@ function AccountDetails() {
             <div>
               <label>Date of Birth</label>
               <input
-                type="text"
+                type="date"
                 name="dateOfBirth"
                 value={formData.dateOfBirth}
                 onChange={onChange}

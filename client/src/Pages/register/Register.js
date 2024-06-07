@@ -9,12 +9,13 @@ import Spinner from "../../Components/navbar/spinner/spinner";
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
+    lastName: "",
     email: "",
     password: "",
     password2: "",
   });
 
-  const { name, email, password, password2 } = formData;
+  const { name, lastName, dateOfBirth, email, password, password2 } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,6 +51,8 @@ function Register() {
     } else {
       const userData = {
         name,
+        lastName,
+        dateOfBirth,
         email,
         password,
       };
@@ -81,6 +84,18 @@ function Register() {
           />
         </div>
         <div className="input-container">
+          <label htmlFor="lastName">Last name</label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={lastName}
+            onChange={onChange}
+            placeholder="Enter your lastname"
+            className="login-input"
+          />
+        </div>
+        <div className="input-container">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -89,6 +104,18 @@ function Register() {
             value={email}
             onChange={onChange}
             placeholder="Enter your email"
+            className="login-input"
+          />
+        </div>
+        <div className="input-container">
+          <label htmlFor="dateOfBirth">Date of birth</label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            name="dateOfBirth"
+            value={dateOfBirth}
+            onChange={onChange}
+            placeholder="Enter your last name"
             className="login-input"
           />
         </div>

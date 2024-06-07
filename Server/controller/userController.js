@@ -62,10 +62,10 @@ const getMe = asyncHandler(async (req, res) => {
 // access: Public
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, lastName, email, dateOfBirth, password } = req.body;
+  const { name, lastName, dateOfBirth, email, password } = req.body;
 
   // Check for name, email and password fields
-  if (!name || !lastName || !email || !dateOfBirth || !password) {
+  if (!name || !email || !lastName || !dateOfBirth || !password) {
     res.status(400);
     throw new Error("Please fill in all fields");
   }
@@ -87,8 +87,8 @@ const registerUser = asyncHandler(async (req, res) => {
   const user = await User.create({
     name,
     lastName,
-    email,
     dateOfBirth,
+    email,
     password: hashedPassword,
   });
 
@@ -98,8 +98,8 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       lastName: user.lastName,
-      email: user.email,
       dateOfBirth: user.dateOfBirth,
+      email: user.email,
       token: generateToken(user._id),
     });
   } else {
@@ -119,7 +119,7 @@ const registerUser = asyncHandler(async (req, res) => {
 //access: Private
 
 const updateUser = asyncHandler(async (req, res) => {
-  const { name, lastName, email, dateOfBirth, password } = req.body;
+  const { name, lastName, email, dateOfBirth } = req.body;
 
   const userId = localStorage.getItem("user");
 
@@ -136,12 +136,6 @@ const updateUser = asyncHandler(async (req, res) => {
   user.email = email || user.email;
   user.dateOfBirth = dateOfBirth || user.dateOfBirth;
 
-  // Hash password if provided
-  if (password) {
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(password, salt);
-  }
-
   // Save new details
   const updatedUser = await user.save();
 
@@ -150,7 +144,6 @@ const updateUser = asyncHandler(async (req, res) => {
     name: updatedUser.name,
     lastName: updatedUser.lastName,
     email: updatedUser.email,
-    dateOfBirth: updatedUser.dateOfBirth,
     token: generateToken(updatedUser._id),
   });
 });
