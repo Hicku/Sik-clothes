@@ -1,4 +1,12 @@
 import "./profile.css";
+import Account from "../../Components/account/Account";
+import AccountDetails from "../../Components/accountDetails/AccountDetails";
+import AddressDetails from "../../Components/addressDetails/AddressDetails";
+import ChangePassword from "../../Components/changePassword/ChangePassword";
+import Contact from "../../Components/contact/Contact";
+import OrderHistory from "../../Components/orderHistory/OrderHistory";
+import PaymentDetails from "../../Components/paymentDetails/PaymentDetails";
+import Wishlist from "../../Components/wishlist/Wishlist";
 
 function profile() {
   const userData = JSON.parse(localStorage.getItem("user"));
@@ -36,7 +44,16 @@ function profile() {
           </li>
         </ul>
       </section>
-      <section className="details-container"></section>
+      <section className="details-container">
+        <Account />
+        {/* <OrderHistory />
+        <Wishlist />
+        <AccountDetails />
+        <ChangePassword />
+        <Contact />
+        <AddressDetails />
+        <PaymentDetails /> */}
+      </section>
     </div>
   );
 }
