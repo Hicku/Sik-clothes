@@ -16,9 +16,23 @@
 
 .account-options-list li {
   display: flex;
+  justify-content: center;
+  align-items: center;
   list-style: none;
   padding: 0;
   border-bottom: 1px solid #b7b7b7;
+  height: 100%;
+}
+
+.account-options-list li button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: none;
+  text-align: start;
+  padding: 20px;
+  cursor: pointer;
 }
 
 .details-container {

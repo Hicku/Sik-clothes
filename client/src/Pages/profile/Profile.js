@@ -8,31 +8,31 @@ function profile() {
       <section>
         <ul className="account-options-list">
           <li>
-            <div>Username: {userData.name}</div>
+            <button>Username: {userData.name}</button>
           </li>
           <li>
-            <div>Account</div>
+            <button>Account</button>
           </li>
           <li>
-            <div>Order history</div>
+            <button>Order history</button>
           </li>
           <li>
-            <div>Wishlist</div>
+            <button>Wishlist</button>
           </li>
           <li>
-            <div>Account details</div>
+            <button>Account details</button>
           </li>
           <li>
-            <div>Change password</div>
+            <button>Change password</button>
           </li>
           <li>
-            <div>Contact</div>
+            <button>Contact</button>
           </li>
           <li>
-            <div>Address details</div>
+            <button>Address details</button>
           </li>
           <li>
-            <div>Payment details</div>
+            <button>Payment details</button>
           </li>
         </ul>
       </section>
