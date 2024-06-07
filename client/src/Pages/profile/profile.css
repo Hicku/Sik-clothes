@@ -1,0 +1,29 @@
+.profile-container {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  border: 1px solid #b7b7b7;
+}
+
+.account-options-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 600px;
+  width: 100%;
+  border-right: 1px solid #b7b7b7;
+}
+
+.account-options-list li {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  border-bottom: 1px solid #b7b7b7;
+}
+
+.details-container {
+  display: flex;
+  justify-content: space-between;
+  height: 600px;
+  width: 80%;
+}
