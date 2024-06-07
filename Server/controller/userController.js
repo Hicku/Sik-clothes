@@ -114,6 +114,47 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 });
 
+//desc: Update User
+//route: PUT /api/users/:id
+//access: Private
+
+const updateUser = asyncHandler(async (req, res) => {
+  const { name, lastName, email, dateOfBirth, password } = req.body;
+
+  const userId = localStorage.getItem("user");
+
+  const user = await User.findById(userId._id);
+
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  // Update user
+  user.name = name || user.name;
+  user.lastName = lastName || user.lastName;
+  user.email = email || user.email;
+  user.dateOfBirth = dateOfBirth || user.dateOfBirth;
+
+  // Hash password if provided
+  if (password) {
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(password, salt);
+  }
+
+  // Save new details
+  const updatedUser = await user.save();
+
+  res.status(200).json({
+    _id: updatedUser._id,
+    name: updatedUser.name,
+    lastName: updatedUser.lastName,
+    email: updatedUser.email,
+    dateOfBirth: updatedUser.dateOfBirth,
+    token: generateToken(updatedUser._id),
+  });
+});
+
 // Generate Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -125,4 +166,5 @@ module.exports = {
   registerUser,
   loginUser,
   getMe,
+  updateUser,
 };
