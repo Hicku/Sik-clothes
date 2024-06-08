@@ -11,6 +11,7 @@ function Register() {
     name: "",
     lastName: "",
     email: "",
+    dateOfBirth: "",
     password: "",
     password2: "",
   });
