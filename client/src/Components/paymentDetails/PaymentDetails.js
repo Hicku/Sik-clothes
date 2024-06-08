@@ -1,5 +1,5 @@
 function paymentDetails() {
-  return <div></div>;
+  return <div>Payment</div>;
 }
 
 export default paymentDetails;

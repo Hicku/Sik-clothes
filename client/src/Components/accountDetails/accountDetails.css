@@ -80,11 +80,12 @@
   padding-top: 20px;
 }
 
-h2 {
+.details-titles h2 {
   display: flex;
   justify-content: start;
   width: 100%;
   margin-bottom: 20px;
+  font-size: 18px;
 }
 
 .personal-title {

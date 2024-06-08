@@ -19,34 +19,40 @@ function Profile() {
   };
 
   const components = {
-    account: <Account />,
-    "account details": <AccountDetails />,
-    "address details": <AddressDetails />,
-    "change password": <ChangePassword />,
-    contact: <Contact />,
-    "order History": <OrderHistory />,
-    "payment details": <PaymentDetails />,
-    wishlist: <Wishlist />,
+    Account: <Account />,
+    "Account details": <AccountDetails />,
+    "Address details": <AddressDetails />,
+    "Change password": <ChangePassword />,
+    Contact: <Contact />,
+    "Order History": <OrderHistory />,
+    "Payment details": <PaymentDetails />,
+    Wishlist: <Wishlist />,
   };
 
   return (
     <div className="profile-container">
-      <section>
-        <ul className="account-options-list">
-          {Object.keys(components).map((component) => {
-            return (
-              <li>
-                <button onClick={() => handleComponentChange(component)}>
-                  {component}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+      <section className="profile-title-container">
+        <div>Hi {userData.name}</div>
+        <h2 className="profile-title">{currentComponent}</h2>
       </section>
-      <section className="details-container">
-        {components[currentComponent]}
-      </section>
+      <div className="options-page-list">
+        <section>
+          <ul className="account-options-list">
+            {Object.keys(components).map((component) => {
+              return (
+                <li>
+                  <button onClick={() => handleComponentChange(component)}>
+                    {component}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
+        <section className="details-container">
+          {components[currentComponent]}
+        </section>
+      </div>
     </div>
   );
 }
