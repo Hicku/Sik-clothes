@@ -1,5 +1,9 @@
 import "./accountDetails.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { updateUser, reset } from "../../features/auth/authSlice";
 
 function AccountDetails() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -11,6 +15,26 @@ function AccountDetails() {
     dateOfBirth: user.dateOfBirth,
   });
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess) {
+      toast.success("Profile updated successfully");
+      navigate("/");
+    }
+
+    dispatch(reset());
+  }, [isError, isSuccess, message, navigate, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -20,22 +44,15 @@ function AccountDetails() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const userId = JSON.parse(localStorage.getItem("user"))._id;
-    const token = localStorage.getItem("token");
 
-    const response = await fetch(`/api/users/${userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(formData),
-    });
+    const userData = {
+      name: formData.name,
+      lastName: formData.lastName,
+      email: formData.email,
+      dateOfBirth: formData.dateOfBirth,
+    };
 
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("user", JSON.stringify(data));
-    }
+    dispatch(updateUser(userData));
   };
 
   return (

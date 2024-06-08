@@ -148,6 +148,7 @@ const updateUser = asyncHandler(async (req, res) => {
     name: updatedUser.name,
     lastName: updatedUser.lastName,
     email: updatedUser.email,
+    token: generateToken(updatedUser._id),
   });
 });
 
