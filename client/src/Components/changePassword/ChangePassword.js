@@ -1,17 +1,61 @@
 import "./changePassword.css";
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { updatePassword, reset } from "../../features/auth/authSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-function changePassword() {
+function ChangePassword() {
+  const [passwords, setPasswords] = useState({
+    currentPassword: "",
+    newPassword: "",
+  });
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess) {
+      toast.success("Password updated successfully");
+      navigate("/");
+    }
+
+    dispatch(reset());
+  });
+
+  const { currentPassword, newPassword } = updatePassword;
+
+  const onChange = (e) =>
+    setPasswords({ ...passwords, [e.target.name]: e.target.value });
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const password = updatePassword.newPassword;
+
+    dispatch(updatePassword(password));
+  };
+
   return (
     <div className="password-page-container">
       <section className="change-password-container">
-        <form>
+        <form onSubmit={onSubmit}>
           <label htmlFor="currentPassword">Password</label>
           <input
             type="password"
             name="currentPassword"
             id="currentPassword"
-            // value={password}
-            // onChange={onChange}
+            value={currentPassword}
+            onChange={onChange}
             className="current-password"
           />
           <label htmlFor="newPassword">New password</label>
@@ -19,8 +63,8 @@ function changePassword() {
             type="password"
             name="newPassword"
             id="newPassword"
-            // value={password}
-            // onChange={onChange}
+            value={newPassword}
+            onChange={onChange}
             className="new-password"
           />
           <button>Update</button>
@@ -31,4 +75,4 @@ function changePassword() {
   );
 }
 
-export default changePassword;
+export default ChangePassword;

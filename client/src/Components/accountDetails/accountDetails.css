@@ -55,7 +55,8 @@
 }
 
 .email-password label {
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 300;
   margin-bottom: 10px;
 }
 
@@ -63,6 +64,7 @@
   height: 40px;
   width: 93%;
   padding-left: 5px;
+  border: 1px solid #454545;
 }
 
 .email-password div {
@@ -107,6 +109,7 @@
   padding-left: 5px;
   width: 93%;
   margin-bottom: 10px;
+  border: 1px solid #454545;
 }
 
 .personal-details form {
@@ -118,7 +121,8 @@
 .personal-details label {
   display: flex;
   justify-content: start;
-  font-size: 14px;
+  font-size: 15px;
+  font-weight: 300;
   margin-bottom: 10px;
 }
 

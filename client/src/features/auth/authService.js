@@ -47,11 +47,26 @@ const updateUser = async (userData) => {
   return response.data;
 };
 
+// udate password
+const updatePassword = async (password) => {
+  const userId = JSON.parse(localStorage.getItem("user"))._id;
+  const token = localStorage.getItem("token");
+
+  const response = await axios.put(API_URL + "password/" + userId, password, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};
+
 const authService = {
   register,
   logout,
   login,
   updateUser,
+  updatePassword,
 };
 
 export default authService;

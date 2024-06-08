@@ -153,6 +153,52 @@ const updateUser = asyncHandler(async (req, res) => {
   });
 });
 
+const updatePassword = asyncHandler(async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  // Check for current password and new password fields
+  if (!currentPassword || !newPassword) {
+    res.status(400);
+    throw new Error("Please fill in all fields");
+  }
+
+  // Get user id from URL params
+  const userId = req.params.id;
+
+  // Check if user exists
+  const user = await User.findById(userId);
+
+  // if user does not exist, return error
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found");
+  }
+
+  // Check if current password is correct
+  if (
+    !(await bcrypt.compare(currentPassword, user.password)) ||
+    currentPassword === ""
+  ) {
+    res.status(401);
+    throw new Error("Invalid password");
+  }
+
+  // Hash new password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(newPassword, salt);
+
+  // Update password
+  await User.findByIdAndUpdate(
+    userId,
+    { password: hashedPassword },
+    { new: true }
+  );
+
+  res.status(200).json({
+    message: "Password updated successfully",
+  });
+});
+
 // Generate Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -165,4 +211,5 @@ module.exports = {
   loginUser,
   getMe,
   updateUser,
+  updatePassword,
 };
