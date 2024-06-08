@@ -2,7 +2,7 @@ import "./product.css";
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-function Product({ product, setSelectedProduct }) {
+function Product({ product, setSelectedProduct, setRecentlyViewed }) {
   const navigate = useNavigate();
 
   const shortTitle = (title) => {
@@ -14,6 +14,18 @@ function Product({ product, setSelectedProduct }) {
 
   const onClick = () => {
     setSelectedProduct(product);
+    setRecentlyViewed((prevState) => {
+      if (prevState.length === 0) {
+        return [product];
+      }
+      if (prevState.length < 5) {
+        return [...prevState, product];
+      }
+      if (prevState.length === 5) {
+        prevState.shift();
+        return [...prevState, product];
+      }
+    });
     navigate("/product");
   };
 

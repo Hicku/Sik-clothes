@@ -6,7 +6,12 @@ import Product from "../../Components/productCard/Product";
 import "./homepage.css";
 import SearchModal from "../../Components/searchModal/SearchModal";
 
-function Homepage({ isOpen, setIsOpen, setSelectedProduct }) {
+function Homepage({
+  isOpen,
+  setIsOpen,
+  setSelectedProduct,
+  setRecentlyViewed,
+}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -44,6 +49,7 @@ function Homepage({ isOpen, setIsOpen, setSelectedProduct }) {
                         key={product._id}
                         product={product}
                         setSelectedProduct={setSelectedProduct}
+                        setRecentlyViewed={setRecentlyViewed}
                       />
                     </li>
                   ))}

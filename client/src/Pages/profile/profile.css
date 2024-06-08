@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column;
   width: 50%;
+  height: auto;
+}
+
+.account-profile-container {
+  background-color: aqua;
+  height: 100vh;
 }
 
 .profile-title-container {

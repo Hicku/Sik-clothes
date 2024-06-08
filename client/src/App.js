@@ -11,8 +11,9 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState({});
+  const [isOpen, setIsOpen] = useState(false); // Used to toggle the search sidebar
+  const [selectedProduct, setSelectedProduct] = useState({}); // Used to store the selected product and display on product page
+  const [recentlyViewed, setRecentlyViewed] = useState([]); // Used to store the recently viewed products
 
   return (
     <>
@@ -28,7 +29,13 @@ function App() {
               <Routes>
                 <Route
                   path="/profile"
-                  element={<Profile isOpen={isOpen} setIsOpen={setIsOpen} />}
+                  element={
+                    <Profile
+                      isOpen={isOpen}
+                      setIsOpen={setIsOpen}
+                      recentlyViewed={recentlyViewed}
+                    />
+                  }
                 />
                 <Route
                   path="/"
@@ -37,6 +44,7 @@ function App() {
                       isOpen={isOpen}
                       setIsOpen={setIsOpen}
                       setSelectedProduct={setSelectedProduct}
+                      setRecentlyViewed={setRecentlyViewed}
                     />
                   }
                 />

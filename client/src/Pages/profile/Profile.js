@@ -9,7 +9,7 @@ import PaymentDetails from "../../Components/paymentDetails/PaymentDetails";
 import Wishlist from "../../Components/wishlist/Wishlist";
 const { useState } = require("react");
 
-function Profile() {
+function Profile({ recentlyViewed }) {
   const userData = JSON.parse(localStorage.getItem("user"));
 
   const [currentComponent, setCurrentComponent] = useState("account");
@@ -19,7 +19,7 @@ function Profile() {
   };
 
   const components = {
-    Account: <Account />,
+    Account: <Account recentlyViewed={recentlyViewed} />,
     "Account details": <AccountDetails />,
     "Address details": <AddressDetails />,
     "Change password": <ChangePassword />,
@@ -30,7 +30,11 @@ function Profile() {
   };
 
   return (
-    <div className="profile-container">
+    <div
+      className={`profile-container ${
+        currentComponent === "Account" ? "account-profile-container" : ""
+      }`}
+    >
       <section className="profile-title-container">
         <div>Hi {userData.name}</div>
         <h2 className="profile-title">{currentComponent}</h2>
