@@ -3,6 +3,7 @@
   flex-direction: row;
   width: 50%;
   border: 1px solid #b7b7b7;
+  margin-bottom: 40px;
 }
 
 .account-options-list {
@@ -22,6 +23,7 @@
   padding: 0;
   border-bottom: 1px solid #b7b7b7;
   height: 100%;
+  width: 180px;
 }
 
 .account-options-list li button {
