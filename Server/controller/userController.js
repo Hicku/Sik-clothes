@@ -121,30 +121,33 @@ const registerUser = asyncHandler(async (req, res) => {
 const updateUser = asyncHandler(async (req, res) => {
   const { name, lastName, email, dateOfBirth } = req.body;
 
-  const userId = localStorage.getItem("user");
+  // Get user id from URL params
+  const userId = req.params.id;
 
-  const user = await User.findById(userId._id);
-
+  // Check if user exists
+  const user = await User.findById(userId);
   if (!user) {
     res.status(404);
     throw new Error("User not found");
   }
 
-  // Update user
-  user.name = name || user.name;
-  user.lastName = lastName || user.lastName;
-  user.email = email || user.email;
-  user.dateOfBirth = dateOfBirth || user.dateOfBirth;
-
-  // Save new details
-  const updatedUser = await user.save();
+  // Update user details
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    {
+      name: name || user.name,
+      lastName: lastName || user.lastName,
+      email: email || user.email,
+      dateOfBirth: dateOfBirth || user.dateOfBirth,
+    },
+    { new: true, runValidators: true }
+  );
 
   res.status(200).json({
     _id: updatedUser._id,
     name: updatedUser.name,
     lastName: updatedUser.lastName,
     email: updatedUser.email,
-    token: generateToken(updatedUser._id),
   });
 });
 

@@ -18,6 +18,26 @@ function AccountDetails() {
     }));
   };
 
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const userId = JSON.parse(localStorage.getItem("user"))._id;
+    const token = localStorage.getItem("token");
+
+    const response = await fetch(`/api/users/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem("user", JSON.stringify(data));
+    }
+  };
+
   return (
     <div className="account-details-container">
       <section className="account-details">
@@ -34,7 +54,7 @@ function AccountDetails() {
         </div>
         <div className="personal-details">
           <h2 className="personal-title">Personal details</h2>
-          <form>
+          <form onSubmit={onSubmit}>
             <div>
               <label>Name</label>
               <input
