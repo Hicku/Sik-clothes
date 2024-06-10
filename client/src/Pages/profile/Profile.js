@@ -30,11 +30,7 @@ function Profile({ recentlyViewed }) {
   };
 
   return (
-    <div
-      className={`profile-container ${
-        currentComponent === "Account" ? "account-profile-container" : ""
-      }`}
-    >
+    <div className="profile-container">
       <section className="profile-title-container">
         <div>Hi {userData.name}</div>
         <h2 className="profile-title">{currentComponent}</h2>

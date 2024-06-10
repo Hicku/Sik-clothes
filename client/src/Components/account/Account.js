@@ -1,9 +1,11 @@
 import Product from "../productCard/Product";
+import Slider from "../slider/Slider";
+import "./account.css";
 
 function Account({ recentlyViewed }) {
   return (
-    <div>
-      <section className="recently-viewed-container">
+    <div className="recently-viewed-container">
+      {/* <section className="recently-viewed-container">
         <h2>Recently Viewed</h2>
         <ul>
           {recentlyViewed.map((product) => (
@@ -11,10 +13,9 @@ function Account({ recentlyViewed }) {
               <Product product={product} />
             </li>
           ))}
-          hello
         </ul>
-      </section>
-      <section className="wish-list-container"></section>
+      </section> */}
+      <Slider className="silder" />
     </div>
   );
 }
