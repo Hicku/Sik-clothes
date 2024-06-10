@@ -12,14 +12,19 @@ const { useState } = require("react");
 function Profile({ recentlyViewed }) {
   const userData = JSON.parse(localStorage.getItem("user"));
 
-  const [currentComponent, setCurrentComponent] = useState("account");
+  const [currentComponent, setCurrentComponent] = useState("Account");
 
   const handleComponentChange = (component) => {
     setCurrentComponent(component);
   };
 
   const components = {
-    Account: <Account recentlyViewed={recentlyViewed} />,
+    Account: (
+      <Account
+        recentlyViewed={recentlyViewed}
+        currentComponent={currentComponent}
+      />
+    ),
     "Account details": <AccountDetails />,
     "Address details": <AddressDetails />,
     "Change password": <ChangePassword />,

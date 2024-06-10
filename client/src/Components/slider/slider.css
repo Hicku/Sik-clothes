@@ -9,15 +9,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: purple;
   width: 400px;
+  height: 100%;
 }
 
 .slider div {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: brown;
   width: 100%;
   height: 100%;
 }
@@ -26,12 +25,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: yellow;
   width: 100%;
   height: 100%;
 }
 
-.slick-prev:before,
-.slick-next:before {
-  color: black; /* or any color you prefer for the arrows */
+.slick-prev,
+.slick-next {
+  color: #454545;
+  font-size: 30px;
 }

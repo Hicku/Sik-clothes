@@ -2,7 +2,12 @@ import "./product.css";
 import { FaCartPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-function Product({ product, setSelectedProduct, setRecentlyViewed }) {
+function Product({
+  product,
+  setSelectedProduct,
+  setRecentlyViewed,
+  currentComponent,
+}) {
   const navigate = useNavigate();
 
   const shortTitle = (title) => {
@@ -40,8 +45,10 @@ function Product({ product, setSelectedProduct, setRecentlyViewed }) {
               : product.title}
           </div>
           <div className="price-cart-container">
-            £{product.price}
-            <FaCartPlus className="cart" />
+            <div>£{product.price}</div>
+            <div>
+              <FaCartPlus className="cart" />
+            </div>
           </div>
         </div>
       </div>

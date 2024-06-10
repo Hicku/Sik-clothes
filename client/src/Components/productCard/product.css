@@ -5,12 +5,18 @@
 }
 
 .product {
-  /* width: 325px; */
+  display: flex;
+  flex-direction: column;
   width: fit-content;
   /* border-radius: 8px; */
   overflow: hidden;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   margin: 20px;
+}
+
+.product-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .product img {
@@ -22,9 +28,11 @@
 .price-cart-container {
   display: flex;
   justify-content: space-between;
-  padding: 10px 40px 10px 40px;
+  padding: 10px 20px 10px 20px;
 }
 
 .cart {
   font-size: x-large;
 }
+
+/* Style for product card in account slider */

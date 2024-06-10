@@ -1,12 +1,13 @@
 import React from "react";
 import Slider from "react-slick";
+import Product from "../productCard/Product";
 import "./slider.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function customSlider() {
+function customSlider({ recentlyViewed, currentComponent }) {
   var settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -15,24 +16,15 @@ function customSlider() {
 
   return (
     <Slider className="slider" {...settings}>
-      <div>
-        <h3>1</h3>
-      </div>
-      <div>
-        <h3>2</h3>
-      </div>
-      <div>
-        <h3>3</h3>
-      </div>
-      <div>
-        <h3>4</h3>
-      </div>
-      <div>
-        <h3>5</h3>
-      </div>
-      <div>
-        <h3>6</h3>
-      </div>
+      {recentlyViewed.map((product) => {
+        return (
+          <Product
+            key={product.id}
+            product={product}
+            currentComponent={currentComponent}
+          />
+        );
+      })}
     </Slider>
   );
 }
