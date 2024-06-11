@@ -5,7 +5,7 @@ import "./slider.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function customSlider({ recentlyViewed, currentComponent }) {
+function CustomSlider({ recentlyViewed, currentComponent }) {
   var settings = {
     dots: false,
     infinite: true,
@@ -15,18 +15,30 @@ function customSlider({ recentlyViewed, currentComponent }) {
   };
 
   return (
-    <Slider className="slider" {...settings}>
-      {recentlyViewed.map((product) => {
-        return (
-          <Product
-            key={product.id}
-            product={product}
-            currentComponent={currentComponent}
-          />
-        );
-      })}
-    </Slider>
+    <>
+      {currentComponent === "wishlist" ? (
+        <Slider className="slider" {...settings}>
+          {recentlyViewed.map((product) => (
+            <Product
+              key={product.id}
+              product={product}
+              currentComponent={currentComponent}
+            />
+          ))}
+        </Slider>
+      ) : (
+        <Slider className="slider" {...settings}>
+          {recentlyViewed.map((product) => (
+            <Product
+              key={product.id}
+              product={product}
+              currentComponent={currentComponent}
+            />
+          ))}
+        </Slider>
+      )}
+    </>
   );
 }
 
-export default customSlider;
+export default CustomSlider;

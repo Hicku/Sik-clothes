@@ -1,0 +1,47 @@
+.contact-options-container {
+  width: 100%;
+}
+
+.contact-options {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.contact-options section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 30px;
+  height: 70px;
+  border-bottom: 1px solid #b7b7b7;
+  width: 50%;
+}
+
+.contact-options section:nth-child(2n + 1) {
+  border-right: 1px solid #b7b7b7;
+}
+
+.contact-options input {
+  height: 20px;
+  width: 20px;
+  margin-right: 30px;
+}
+
+.contact-options label {
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 15px;
+}
+
+.contact-options div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.options-icon {
+  width: 35px;
+  height: 35px;
+}
