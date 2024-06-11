@@ -5,7 +5,7 @@ import Login from "./Pages/login/Login";
 import Register from "./Pages/register/Register";
 import Navabar from "./Components/navbar/Navbar";
 import ProductPage from "./Pages/productPage/ProductPage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -13,14 +13,22 @@ import "./App.css";
 function App() {
   const [isOpen, setIsOpen] = useState(false); // Used to toggle the search sidebar
   const [selectedProduct, setSelectedProduct] = useState({}); // Used to store the selected product and display on product page
-  const [recentlyViewed, setRecentlyViewed] = useState([]); // Used to store the recently viewed products
-  const [wishlist, setWishlist] = useState([]); // Used to store the wishlist products
+  const [recentlyViewed, setRecentlyViewed] = useState(() => {
+    const localData = localStorage.getItem("recentlyViewed");
+    return localData ? JSON.parse(localData) : [];
+  }); // Used to store the recently viewed products
+  const [wishlist, setWishlist] = useState(() => {
+    const localData = localStorage.getItem("wishlist");
+    return localData ? JSON.parse(localData) : [];
+  }); // Used to store the wishlist products
 
-  componentWillMount() {
-    persistStore(store, {}, () => {
-    this.setState({rehydrated: true})
-    })
-  }
+  useEffect(() => {
+    localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
+  }, [recentlyViewed]);
+
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
 
   return (
     <>
