@@ -1,7 +1,11 @@
 import React from "react";
 import "./productPage.css";
 
-function ProductPage({ isOpen, setIsOpen, selectedProduct }) {
+function ProductPage({ isOpen, setIsOpen, selectedProduct, setWishlist }) {
+  const addToWishlist = () => {
+    setWishlist((prev) => [...prev, selectedProduct]);
+  };
+
   return (
     <div className="product-page-container">
       <section className="image-container">
@@ -40,7 +44,7 @@ function ProductPage({ isOpen, setIsOpen, selectedProduct }) {
           </div>
           <div className="cart-wish-buttons">
             <button className="cart-btn">Add to cart</button>
-            <button>Add to wishlist</button>
+            <button onClick={addToWishlist}>Add to wishlist</button>
           </div>
         </div>
         <div className="description-container">

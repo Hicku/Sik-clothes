@@ -9,7 +9,7 @@ import PaymentDetails from "../../Components/paymentDetails/PaymentDetails";
 import Wishlist from "../../Components/wishlist/Wishlist";
 const { useState } = require("react");
 
-function Profile({ recentlyViewed }) {
+function Profile({ recentlyViewed, wishlist }) {
   const userData = JSON.parse(localStorage.getItem("user"));
 
   const [currentComponent, setCurrentComponent] = useState("Account");
@@ -31,7 +31,9 @@ function Profile({ recentlyViewed }) {
     Contact: <Contact />,
     "Order History": <OrderHistory />,
     "Payment details": <PaymentDetails />,
-    Wishlist: <Wishlist />,
+    Wishlist: (
+      <Wishlist wishlist={wishlist} currentComponent={currentComponent} />
+    ),
   };
 
   return (

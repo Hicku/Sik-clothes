@@ -1,10 +1,10 @@
 import Slider from "../slider/Slider";
 
-function WishList() {
+function WishList({ wishlist, currentComponent }) {
   return (
     <div className="recently-viewed-container">
       <section className="recently-viewed-container">
-        <Slider />
+        <Slider wishlist={wishlist} currentComponent={currentComponent} />
       </section>
     </div>
   );

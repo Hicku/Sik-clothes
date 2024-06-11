@@ -14,6 +14,13 @@ function App() {
   const [isOpen, setIsOpen] = useState(false); // Used to toggle the search sidebar
   const [selectedProduct, setSelectedProduct] = useState({}); // Used to store the selected product and display on product page
   const [recentlyViewed, setRecentlyViewed] = useState([]); // Used to store the recently viewed products
+  const [wishlist, setWishlist] = useState([]); // Used to store the wishlist products
+
+  componentWillMount() {
+    persistStore(store, {}, () => {
+    this.setState({rehydrated: true})
+    })
+  }
 
   return (
     <>
@@ -34,6 +41,7 @@ function App() {
                       isOpen={isOpen}
                       setIsOpen={setIsOpen}
                       recentlyViewed={recentlyViewed}
+                      wishlist={wishlist}
                     />
                   }
                 />
@@ -63,6 +71,7 @@ function App() {
                       isOpen={isOpen}
                       setIsOpen={setIsOpen}
                       selectedProduct={selectedProduct}
+                      setWishlist={setWishlist}
                     />
                   }
                 />

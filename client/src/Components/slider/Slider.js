@@ -5,7 +5,7 @@ import "./slider.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function CustomSlider({ recentlyViewed, currentComponent }) {
+function CustomSlider({ recentlyViewed, currentComponent, wishlist }) {
   var settings = {
     dots: false,
     infinite: true,
@@ -16,9 +16,9 @@ function CustomSlider({ recentlyViewed, currentComponent }) {
 
   return (
     <>
-      {currentComponent === "wishlist" ? (
+      {currentComponent === "Wishlist" ? (
         <Slider className="slider" {...settings}>
-          {recentlyViewed.map((product) => (
+          {wishlist.map((product) => (
             <Product
               key={product.id}
               product={product}
