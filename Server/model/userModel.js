@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const addressSchema = import("./addressModel");
 
 const userSchema = new mongoose.Schema(
   {
@@ -18,6 +19,10 @@ const userSchema = new mongoose.Schema(
     dateOfBirth: {
       type: String,
       required: [true, "Please provide a date of birth"],
+    },
+    address: {
+      type: addressSchema,
+      required: false,
     },
     password: {
       type: String,

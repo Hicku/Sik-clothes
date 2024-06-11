@@ -9,23 +9,30 @@ import { useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import WishListPage from "./Pages/wishListPage/WishListPage";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false); // Used to toggle the search sidebar
-  const [selectedProduct, setSelectedProduct] = useState({}); // Used to store the selected product and display on product page
+  // Used to toggle the search sidebar
+  const [isOpen, setIsOpen] = useState(false);
+  // Used to store the selected product and display on product page
+  const [selectedProduct, setSelectedProduct] = useState({});
+  // Used to store the recently viewed products. Gets local storage data to persist the data, else empty array
   const [recentlyViewed, setRecentlyViewed] = useState(() => {
     const localData = localStorage.getItem("recentlyViewed");
     return localData ? JSON.parse(localData) : [];
-  }); // Used to store the recently viewed products
+  });
+  // Used to store the wishlist products. Gets local storage data to persist the data, else empty array
   const [wishlist, setWishlist] = useState(() => {
     const localData = localStorage.getItem("wishlist");
     return localData ? JSON.parse(localData) : [];
-  }); // Used to store the wishlist products
+  });
 
+  // Store recently viewed products in local storage
   useEffect(() => {
     localStorage.setItem("recentlyViewed", JSON.stringify(recentlyViewed));
   }, [recentlyViewed]);
 
+  // Store wishlist products in local storage
   useEffect(() => {
     localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
@@ -82,6 +89,10 @@ function App() {
                       setWishlist={setWishlist}
                     />
                   }
+                />
+                <Route
+                  path="/wishlist"
+                  element={<WishListPage wishlist={wishlist} />}
                 />
               </Routes>
             </main>

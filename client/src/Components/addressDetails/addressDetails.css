@@ -1,0 +1,29 @@
+.address-details-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.address-details-container div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #b7b7b7;
+  width: 50%;
+  height: 200px;
+}
+
+.address-details-container button {
+  margin-top: 20px;
+  width: 60%;
+  height: 40px;
+  background-color: #454545;
+  color: #fefcff;
+  border: none;
+}
+
+.address-icon {
+  font-size: 30px;
+}

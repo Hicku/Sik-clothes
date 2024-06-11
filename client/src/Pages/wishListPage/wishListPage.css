@@ -1,0 +1,22 @@
+.wishlist-page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fefcff;
+  width: 100%;
+  height: 100%;
+}
+
+.wishlist-page-container ul {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.product-container li {
+  display: flex;
+  width: 100%;
+}
