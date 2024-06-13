@@ -8,6 +8,7 @@ import { IoMdClose } from "react-icons/io";
 
 function AddressDetails() {
   const [onAddressForm, setOnAddressForm] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const [addressFormData, setAddressFormData] = useState({
     number: "",
     street: "",
@@ -26,15 +27,20 @@ function AddressDetails() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isError) {
-      toast.error(message);
-    }
+    if (mounted) {
+      if (isError) {
+        toast.error(message);
+      }
 
-    if (isSuccess || addresses) {
-      toast.success(message);
+      if (isSuccess) {
+        toast.success(message);
+      }
+
+      dispatch(reset());
+    } else {
+      setMounted(true);
     }
-    dispatch(reset());
-  }, [addresses, isError, isSuccess, message, dispatch]);
+  }, [addresses, isError, isSuccess, message, dispatch, mounted]);
 
   const onChange = (e) => {
     setAddressFormData((prevState) => ({
@@ -64,6 +70,14 @@ function AddressDetails() {
 
     dispatch(addAddress(addressData));
     setOnAddressForm(false);
+    setAddressFormData({
+      number: "",
+      street: "",
+      city: "",
+      postcode: "",
+      country: "",
+      user: "",
+    });
   };
 
   return (
