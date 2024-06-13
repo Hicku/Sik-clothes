@@ -61,45 +61,6 @@ const updatePassword = async (password) => {
   return response.data;
 };
 
-// addAddress
-const addAddress = async (address) => {
-  const userId = JSON.parse(localStorage.getItem("user"))._id;
-  const token = localStorage.getItem("token");
-
-  const response = await axios.put(API_URL + "address/", address, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  return response.data;
-};
-
-// update address
-const updateAddress = async (address) => {
-  const userId = JSON.parse(localStorage.getItem("user"))._id;
-  const token = localStorage.getItem("token");
-
-  const response = await axios.put(API_URL + "address/" + userId, address, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
-};
-
-// delete address
-const deleteAddress = async (address) => {
-  const userId = JSON.parse(localStorage.getItem("user"))._id;
-  const token = localStorage.getItem("token");
-
-  const response = await axios.put(API_URL + "address/" + userId, address, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-};
-
 const authService = {
   register,
   logout,

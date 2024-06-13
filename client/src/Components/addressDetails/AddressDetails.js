@@ -1,33 +1,85 @@
 import { FaRegAddressCard } from "react-icons/fa6";
 import "./addressDetails.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { addAddress, reset } from "../../features/address/addressSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 
 function AddressDetails() {
-  const [newAddress, setNewAddress] = useState(false);
+  const [onAddressForm, setOnAddressForm] = useState(false);
+  const [addressFormData, setAddressFormData] = useState({
+    number: "",
+    street: "",
+    city: "",
+    postcode: "",
+    country: "",
+    user: JSON.parse(localStorage.getItem("user"))._id,
+  });
 
-  const addAddress = () => {
-    setNewAddress(true);
+  const { number, street, city, postcode, country, user } = addressFormData;
+
+  const { addresses, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.address
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+
+    if (isSuccess || addresses) {
+      toast.success(message);
+    }
+    dispatch(reset());
+  }, [addresses, isError, isSuccess, message, dispatch]);
+
+  const onChange = (e) => {
+    setAddressFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const goToAddressForm = () => {
+    setOnAddressForm(true);
   };
 
   const closeNewAddress = () => {
-    setNewAddress(false);
+    setOnAddressForm(false);
+  };
+
+  const updateAddress = (e) => {
+    e.preventDefault();
+    const addressData = {
+      number,
+      street,
+      city,
+      postcode,
+      country,
+      user,
+    };
+
+    dispatch(addAddress(addressData));
+    setOnAddressForm(false);
   };
 
   return (
     <div
       className={
-        newAddress
+        onAddressForm
           ? "address-details-container-form"
           : "address-details-container-update"
       }
     >
       <div
         className={`update-address-container ${
-          newAddress ? "new-address-container" : ""
+          onAddressForm ? "new-address-container" : ""
         }`}
       >
-        {newAddress ? (
+        {onAddressForm ? (
           <div className="new-address">
             <div className="address-close-button-container">
               <IoMdClose
@@ -36,26 +88,51 @@ function AddressDetails() {
               />
             </div>
             <div className="address-form-container">
-              <form>
+              <form onSubmit={updateAddress}>
                 <div>
-                  <label>Number</label>
-                  <input type="text"></input>
+                  <label htmlFor="number">Number</label>
+                  <input
+                    name="number"
+                    onChange={onChange}
+                    value={number}
+                    type="text"
+                  ></input>
                 </div>
                 <div>
-                  <label>Street</label>
-                  <input type="text"></input>
+                  <label htmlFor="street">Street</label>
+                  <input
+                    name="street"
+                    onChange={onChange}
+                    value={street}
+                    type="text"
+                  ></input>
                 </div>
                 <div>
-                  <label>City</label>
-                  <input type="text"></input>
+                  <label htmlFor="city">City</label>
+                  <input
+                    name="city"
+                    onChange={onChange}
+                    value={city}
+                    type="text"
+                  ></input>
                 </div>
                 <div>
-                  <label>Postcode</label>
-                  <input type="text"></input>
+                  <label htmlFor="postcode">Postcode</label>
+                  <input
+                    name="postcode"
+                    onChange={onChange}
+                    value={postcode}
+                    type="text"
+                  ></input>
                 </div>
                 <div>
-                  <label>Country</label>
-                  <input type="text"></input>
+                  <label htmlFor="country">Country</label>
+                  <input
+                    name="country"
+                    onChange={onChange}
+                    value={country}
+                    type="text"
+                  ></input>
                 </div>
                 <div>
                   <button>Update</button>
@@ -66,7 +143,7 @@ function AddressDetails() {
         ) : (
           <>
             <FaRegAddressCard className="address-icon" />
-            <button className="address-update-button" onClick={addAddress}>
+            <button className="address-update-button" onClick={goToAddressForm}>
               Add address
             </button>
           </>

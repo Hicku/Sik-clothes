@@ -37,7 +37,7 @@ const createAddress = asyncHandler(async (req, res) => {
     city: req.body.city,
     postcode: req.body.postcode,
     country: req.body.country,
-    user: req.user.id,
+    user: req.body.user,
   });
 
   res.status(200).json(address);
