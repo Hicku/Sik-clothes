@@ -85,6 +85,60 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
+// Add address
+export const addAddress = createAsyncThunk(
+  "auth/addAddress",
+  async (address, thunkAPI) => {
+    try {
+      return await authService.addAddress(address);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// update address
+export const updateAddress = createAsyncThunk(
+  "auth/updateAddress",
+  async (id, address, thunkAPI) => {
+    try {
+      return await authService.updateAddress(address, id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Adelete address
+export const deleteAddress = createAsyncThunk(
+  "auth/deleteAddress",
+  async (id, thunkAPI) => {
+    try {
+      return await authService.deleteAddress(id);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -154,6 +208,45 @@ export const authSlice = createSlice({
         state.message = "Password updated successfully!";
       })
       .addCase(updatePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(updateAddress.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAddress.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = "Address updated successfully!";
+      })
+      .addCase(updateAddress.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteAddress.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteAddress.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = "Address deleted successfully!";
+      })
+      .addCase(deleteAddress.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(addAddress.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addAddress.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = "Address added successfully!";
+      })
+      .addCase(addAddress.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

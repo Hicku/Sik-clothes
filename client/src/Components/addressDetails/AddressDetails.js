@@ -10,11 +10,17 @@ function AddressDetails() {
     setNewAddress(true);
   };
 
+  const closeNewAddress = () => {
+    setNewAddress(false);
+  };
+
   return (
     <div
-      className={`address-details-container-update ${
-        newAddress ? "address-details-container-form" : ""
-      }`}
+      className={
+        newAddress
+          ? "address-details-container-form"
+          : "address-details-container-update"
+      }
     >
       <div
         className={`update-address-container ${
@@ -24,9 +30,10 @@ function AddressDetails() {
         {newAddress ? (
           <div className="new-address">
             <div className="address-close-button-container">
-              <button className="address-close-button">
-                <IoMdClose />
-              </button>
+              <IoMdClose
+                onClick={closeNewAddress}
+                className="address-close-button"
+              />
             </div>
             <div className="address-form-container">
               <form>
@@ -49,6 +56,9 @@ function AddressDetails() {
                 <div>
                   <label>Country</label>
                   <input type="text"></input>
+                </div>
+                <div>
+                  <button>Update</button>
                 </div>
               </form>
             </div>
