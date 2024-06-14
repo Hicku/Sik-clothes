@@ -12,6 +12,8 @@ function ChangePassword() {
     newPassword: "",
   });
 
+  const { currentPassword, newPassword } = passwords;
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -32,17 +34,18 @@ function ChangePassword() {
     dispatch(reset());
   });
 
-  const { currentPassword, newPassword } = updatePassword;
-
   const onChange = (e) =>
     setPasswords({ ...passwords, [e.target.name]: e.target.value });
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const password = updatePassword.newPassword;
+    const passwordData = {
+      currentPassword,
+      newPassword,
+    };
 
-    dispatch(updatePassword(password));
+    dispatch(updatePassword(passwordData));
   };
 
   return (

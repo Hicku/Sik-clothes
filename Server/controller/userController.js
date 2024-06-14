@@ -153,6 +153,7 @@ const updateUser = asyncHandler(async (req, res) => {
   });
 });
 
+// Update password
 const updatePassword = asyncHandler(async (req, res) => {
   const { currentPassword, newPassword } = req.body;
 

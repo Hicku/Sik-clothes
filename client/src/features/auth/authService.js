@@ -48,15 +48,19 @@ const updateUser = async (userData) => {
 };
 
 // update password
-const updatePassword = async (password) => {
+const updatePassword = async (passwordData) => {
   const userId = JSON.parse(localStorage.getItem("user"))._id;
   const token = localStorage.getItem("token");
 
-  const response = await axios.put(API_URL + "password/" + userId, password, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await axios.put(
+    API_URL + "password/" + userId,
+    passwordData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
   return response.data;
 };
