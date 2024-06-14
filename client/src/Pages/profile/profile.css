@@ -58,9 +58,12 @@
   align-items: center;
   list-style: none;
   padding: 0;
-  border-bottom: 1px solid #b7b7b7;
   height: 100%;
   width: 180px;
+}
+
+.account-options-list li:not(:last-child) {
+  border-bottom: 1px solid #b7b7b7;
 }
 
 .account-options-list li button {

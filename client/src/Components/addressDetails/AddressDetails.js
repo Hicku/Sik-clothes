@@ -1,18 +1,20 @@
 import { FaRegAddressCard } from "react-icons/fa6";
 import "./addressDetails.css";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   getAllAddresses,
   addAddress,
   reset,
+  deleteAddress,
+  updateAddress,
 } from "../../features/address/addressSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 
 function AddressDetails({ setCurrentComponent }) {
-  const [onAddressForm, setOnAddressForm] = useState(false);
+  const [isAddressForm, setIsAddressForm] = useState(false);
+  const [isUpdateAddressForm, setIsUpdateAddressForm] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [addressFormData, setAddressFormData] = useState({
     number: "",
@@ -31,7 +33,6 @@ function AddressDetails({ setCurrentComponent }) {
   );
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllAddresses(JSON.parse(localStorage.getItem("user"))._id));
@@ -70,14 +71,20 @@ function AddressDetails({ setCurrentComponent }) {
   }, [addresses, isError, isSuccess, message, dispatch, mounted]);
 
   const goToAddressForm = () => {
-    setOnAddressForm(true);
+    setIsAddressForm(true);
+  };
+
+  const goToUpdateAddressForm = () => {
+    setIsAddressForm(true);
+    setIsUpdateAddressForm(true);
   };
 
   const closeNewAddress = () => {
-    setOnAddressForm(false);
+    setIsAddressForm(false);
+    setIsUpdateAddressForm(false);
   };
 
-  const updateAddress = (e) => {
+  const addNewAddress = (e) => {
     e.preventDefault();
     const addressData = {
       number,
@@ -89,7 +96,7 @@ function AddressDetails({ setCurrentComponent }) {
     };
 
     dispatch(addAddress(addressData));
-    setOnAddressForm(false);
+    setIsAddressForm(false);
     setAddressFormData({
       number: "",
       street: "",
@@ -100,21 +107,28 @@ function AddressDetails({ setCurrentComponent }) {
     });
   };
 
+  const onDeleteAddress = () => {};
+
+  const onUpdateAddress = (e) => {
+    e.preventDefault();
+    console.log("hello");
+  };
+
   return (
     <div className="address-page-container">
       <section
         className={
-          onAddressForm
+          isAddressForm
             ? "address-details-container-form"
-            : "address-details-container-update"
+            : "address-details-container-add"
         }
       >
         <div
           className={`update-address-container ${
-            onAddressForm ? "new-address-container" : ""
+            isAddressForm ? "new-address-container" : ""
           }`}
         >
-          {onAddressForm ? (
+          {isAddressForm ? (
             <div className="new-address">
               <div className="address-close-button-container">
                 <IoMdClose
@@ -123,7 +137,11 @@ function AddressDetails({ setCurrentComponent }) {
                 />
               </div>
               <div className="address-form-container">
-                <form onSubmit={updateAddress}>
+                <form
+                  onSubmit={
+                    isUpdateAddressForm ? onUpdateAddress : addNewAddress
+                  }
+                >
                   <div>
                     <label htmlFor="number">Number</label>
                     <input
@@ -170,7 +188,7 @@ function AddressDetails({ setCurrentComponent }) {
                     ></input>
                   </div>
                   <div>
-                    <button>Update</button>
+                    <button>{isUpdateAddressForm ? "Update" : "Submit"}</button>
                   </div>
                 </form>
               </div>
@@ -178,10 +196,7 @@ function AddressDetails({ setCurrentComponent }) {
           ) : (
             <>
               <FaRegAddressCard className="address-icon" />
-              <button
-                className="address-update-button"
-                onClick={goToAddressForm}
-              >
+              <button className="address-new-button" onClick={goToAddressForm}>
                 Add address
               </button>
             </>
@@ -192,7 +207,7 @@ function AddressDetails({ setCurrentComponent }) {
         {localAdresses.map((address) => (
           <div className="display-address" key={address._id}>
             <div className="edit-address-container">
-              <div>Edit</div>
+              <button onClick={goToUpdateAddressForm}>Edit</button>
             </div>
             <div className="saved-address-details">
               <div>{address.number}</div>
@@ -202,7 +217,7 @@ function AddressDetails({ setCurrentComponent }) {
               <div>{address.country}</div>
             </div>
             <div className="delete-address-container">
-              <button>Delete</button>
+              <button onClick={onDeleteAddress}>Delete</button>
             </div>
           </div>
         ))}
