@@ -26,7 +26,9 @@ function Profile({ recentlyViewed, wishlist }) {
       />
     ),
     "Account details": <AccountDetails />,
-    "Address details": <AddressDetails />,
+    "Address details": (
+      <AddressDetails setCurrentComponent={setCurrentComponent} />
+    ),
     "Change password": <ChangePassword />,
     Contact: <Contact />,
     "Order History": <OrderHistory />,

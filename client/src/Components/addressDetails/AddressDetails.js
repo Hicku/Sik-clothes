@@ -1,6 +1,7 @@
 import { FaRegAddressCard } from "react-icons/fa6";
 import "./addressDetails.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   getAllAddresses,
@@ -10,7 +11,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 
-function AddressDetails() {
+function AddressDetails({ setCurrentComponent }) {
   const [onAddressForm, setOnAddressForm] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [addressFormData, setAddressFormData] = useState({
@@ -30,6 +31,7 @@ function AddressDetails() {
   );
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllAddresses(JSON.parse(localStorage.getItem("user"))._id));
@@ -59,6 +61,9 @@ function AddressDetails() {
       }
 
       dispatch(reset());
+      if (isSuccess && message === "Address added successfully!") {
+        setCurrentComponent("Account");
+      }
     } else {
       setMounted(true);
     }
