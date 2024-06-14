@@ -42,10 +42,23 @@ const deleteAddress = async (addressId) => {
   return response.data;
 };
 
+const getAllAddresses = async (userId) => {
+  const token = localStorage.getItem("token");
+
+  const response = await axios.get(API_URL + userId, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response.data;
+};
+
 const addressService = {
   addAddress,
   updateAddress,
   deleteAddress,
+  getAllAddresses,
 };
 
 export default addressService;

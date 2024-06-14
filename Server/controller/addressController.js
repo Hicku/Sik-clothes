@@ -1,14 +1,13 @@
 const asyncHandler = require("express-async-handler");
 
 const Address = require("../model/addressModel");
-const User = require("../model/userModel");
 
 // Desc: get all addresses
 // Route: POST /api/address
 // Access: Private
 
 const getAllAddresses = asyncHandler(async (req, res) => {
-  const addresses = await Address.find({ user: req.user.id });
+  const addresses = await Address.find({ user: req.params.id });
 
   res.status(200).json(addresses);
 });
