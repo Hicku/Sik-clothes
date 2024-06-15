@@ -95,6 +95,7 @@ export const addressSlice = createSlice({
       .addCase(updateAddress.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
+        state.addresses = action.payload;
         state.message = "Address updated successfully!";
       })
       .addCase(updateAddress.rejected, (state, action) => {

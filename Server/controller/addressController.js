@@ -63,7 +63,7 @@ const updateAddress = asyncHandler(async (req, res) => {
   }
 
   // Check if goal/user id matches matches user id
-  if (!address.user.toString() !== req.user.id) {
+  if (!address.user.toString() !== req.body.user._id) {
     res.status(401);
     throw new Error("User not authorised");
   }

@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 
 function AddressDetails({ setCurrentComponent }) {
+  const [selectedAddress, setSelectedAddress] = useState({});
   const [isAddressForm, setIsAddressForm] = useState(false);
   const [isUpdateAddressForm, setIsUpdateAddressForm] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -74,7 +75,16 @@ function AddressDetails({ setCurrentComponent }) {
     setIsAddressForm(true);
   };
 
-  const goToUpdateAddressForm = () => {
+  const goToUpdateAddressForm = (addressData) => {
+    setSelectedAddress(addressData);
+    setAddressFormData({
+      number: addressData.number,
+      street: addressData.street,
+      city: addressData.city,
+      postcode: addressData.postcode,
+      country: addressData.country,
+      user: JSON.parse(localStorage.getItem("user"))._id,
+    });
     setIsAddressForm(true);
     setIsUpdateAddressForm(true);
   };
@@ -111,7 +121,8 @@ function AddressDetails({ setCurrentComponent }) {
 
   const onUpdateAddress = (e) => {
     e.preventDefault();
-    console.log("hello");
+    const addressData = {};
+    dispatch(updateAddress(addressData));
   };
 
   return (
@@ -207,7 +218,9 @@ function AddressDetails({ setCurrentComponent }) {
         {localAdresses.map((address) => (
           <div className="display-address" key={address._id}>
             <div className="edit-address-container">
-              <button onClick={goToUpdateAddressForm}>Edit</button>
+              <button onClick={() => goToUpdateAddressForm(address)}>
+                Edit
+              </button>
             </div>
             <div className="saved-address-details">
               <div>{address.number}</div>
