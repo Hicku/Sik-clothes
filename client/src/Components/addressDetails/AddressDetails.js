@@ -91,7 +91,7 @@ function AddressDetails({ setCurrentComponent }) {
 
   const closeNewAddress = () => {
     setIsAddressForm(false);
-    setIsUpdateAddressForm(false);
+    setIsUpdateAddressForm(true);
   };
 
   const addNewAddress = (e) => {
@@ -121,8 +121,25 @@ function AddressDetails({ setCurrentComponent }) {
 
   const onUpdateAddress = (e) => {
     e.preventDefault();
-    const addressData = {};
-    dispatch(updateAddress(addressData));
+    const addressData = {
+      number,
+      street,
+      city,
+      postcode,
+      country,
+      user,
+    };
+    dispatch(updateAddress(addressData, selectedAddress._id));
+
+    setIsUpdateAddressForm(false);
+    setAddressFormData({
+      number: "",
+      street: "",
+      city: "",
+      postcode: "",
+      country: "",
+      user: "",
+    });
   };
 
   return (

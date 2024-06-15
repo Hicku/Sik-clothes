@@ -48,7 +48,8 @@ const createAddress = asyncHandler(async (req, res) => {
 
 const updateAddress = asyncHandler(async (req, res) => {
   // Find address by id
-  const address = await findById(req.params.id);
+  const address = await Address.findById(req.params.id);
+  const user = req.body.user;
 
   // If no address, throw error
   if (!address) {
@@ -57,13 +58,13 @@ const updateAddress = asyncHandler(async (req, res) => {
   }
 
   // Check for user
-  if (!req.user) {
+  if (!user) {
     res.status(401);
     throw new Error("User not found");
   }
 
   // Check if goal/user id matches matches user id
-  if (!address.user.toString() !== req.body.user._id) {
+  if (!address.user.toString() !== user) {
     res.status(401);
     throw new Error("User not authorised");
   }
