@@ -27,24 +27,6 @@ export const addAddress = createAsyncThunk(
   }
 );
 
-// update address
-export const updateAddress = createAsyncThunk(
-  "address/updateAddress",
-  async (id, address, thunkAPI) => {
-    try {
-      return await addressService.updateAddress(address, id);
-    } catch (error) {
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-      return thunkAPI.rejectWithValue(message);
-    }
-  }
-);
-
 // delete address
 export const deleteAddress = createAsyncThunk(
   "address/deleteAddress",
@@ -88,21 +70,6 @@ export const addressSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      //address cases
-      .addCase(updateAddress.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(updateAddress.fulfilled, (state, action) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.addresses = action.payload;
-        state.message = "Address updated successfully!";
-      })
-      .addCase(updateAddress.rejected, (state, action) => {
-        state.isLoading = false;
-        state.isError = true;
-        state.message = action.payload;
-      })
       .addCase(deleteAddress.pending, (state) => {
         state.isLoading = true;
       })

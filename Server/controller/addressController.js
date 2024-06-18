@@ -46,37 +46,55 @@ const createAddress = asyncHandler(async (req, res) => {
 // Route: PUT /api/address
 // Access: Private
 
+// const updateAddress = asyncHandler(async (req, res) => {
+//   const addressCheck = await Address.findById(req.params.id);
+//   const user = req.body.user;
+
+//   // If no address, throw error
+//   if (!addressCheck) {
+//     res.status(401);
+//     throw new Error("Address not found");
+//   }
+
+//   // Check for user
+//   if (!user) {
+//     res.status(401);
+//     throw new Error("User not found");
+//   }
+
+//   // update address
+//   const updatedAddress = await Address.findByIdAndUpdate(
+//     req.params.id,
+//     req.body,
+//     {
+//       new: true,
+//     }
+//   );
+
+//   res.status(200).json(updatedAddress);
+// });
+
 const updateAddress = asyncHandler(async (req, res) => {
-  // Find address by id
-  const address = await Address.findById(req.params.id);
-  const user = req.body.user;
+  const { id, city, country, number, postcode, street } = req.body;
 
-  // If no address, throw error
+  // Find the address by id
+  const address = await Address.findById(id);
+
+  // Check if address exists
   if (!address) {
-    res.status(401);
-    throw new Error("Address not found");
+    res.status(404).json({ message: "Address not found" });
+    return;
   }
 
-  // Check for user
-  if (!user) {
-    res.status(401);
-    throw new Error("User not found");
-  }
+  // Update the address fields
+  address.city = city;
+  address.country = country;
+  address.number = number;
+  address.postcode = postcode;
+  address.street = street;
 
-  // Check if goal/user id matches matches user id
-  if (!address.user.toString() !== user) {
-    res.status(401);
-    throw new Error("User not authorised");
-  }
-
-  // update address
-  const updatedAddress = await Address.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    {
-      new: true,
-    }
-  );
+  // Save the updated address
+  const updatedAddress = await address.save();
 
   res.status(200).json(updatedAddress);
 });

@@ -17,27 +17,9 @@ const addAddress = async (address) => {
   return response.data;
 };
 
-// update address
-const updateAddress = async (addressId, address) => {
-  const token = localStorage.getItem("token");
-
-  const response = await axios.put(API_URL + addressId, address, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.data;
-};
-
 // delete address
 const deleteAddress = async (addressId) => {
-  const token = localStorage.getItem("token");
-
-  const response = await axios.delete(API_URL + addressId, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  const response = await axios.delete(API_URL + addressId, {});
 
   return response.data;
 };
@@ -56,7 +38,6 @@ const getAllAddresses = async (userId) => {
 
 const addressService = {
   addAddress,
-  updateAddress,
   deleteAddress,
   getAllAddresses,
 };

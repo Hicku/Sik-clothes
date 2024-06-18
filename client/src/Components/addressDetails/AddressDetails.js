@@ -7,7 +7,6 @@ import {
   addAddress,
   reset,
   deleteAddress,
-  updateAddress,
 } from "../../features/address/addressSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
@@ -75,23 +74,16 @@ function AddressDetails({ setCurrentComponent }) {
     setIsAddressForm(true);
   };
 
-  const goToUpdateAddressForm = (addressData) => {
-    setSelectedAddress(addressData);
-    setAddressFormData({
-      number: addressData.number,
-      street: addressData.street,
-      city: addressData.city,
-      postcode: addressData.postcode,
-      country: addressData.country,
-      user: JSON.parse(localStorage.getItem("user"))._id,
-    });
-    setIsAddressForm(true);
-    setIsUpdateAddressForm(true);
-  };
-
   const closeNewAddress = () => {
+    setAddressFormData({
+      number: "",
+      street: "",
+      city: "",
+      postcode: "",
+      country: "",
+      user: "",
+    });
     setIsAddressForm(false);
-    setIsUpdateAddressForm(true);
   };
 
   const addNewAddress = (e) => {
@@ -107,31 +99,6 @@ function AddressDetails({ setCurrentComponent }) {
 
     dispatch(addAddress(addressData));
     setIsAddressForm(false);
-    setAddressFormData({
-      number: "",
-      street: "",
-      city: "",
-      postcode: "",
-      country: "",
-      user: "",
-    });
-  };
-
-  const onDeleteAddress = () => {};
-
-  const onUpdateAddress = (e) => {
-    e.preventDefault();
-    const addressData = {
-      number,
-      street,
-      city,
-      postcode,
-      country,
-      user,
-    };
-    dispatch(updateAddress(addressData, selectedAddress._id));
-
-    setIsUpdateAddressForm(false);
     setAddressFormData({
       number: "",
       street: "",
@@ -165,11 +132,7 @@ function AddressDetails({ setCurrentComponent }) {
                 />
               </div>
               <div className="address-form-container">
-                <form
-                  onSubmit={
-                    isUpdateAddressForm ? onUpdateAddress : addNewAddress
-                  }
-                >
+                <form onSubmit={addNewAddress}>
                   <div>
                     <label htmlFor="number">Number</label>
                     <input
@@ -216,7 +179,7 @@ function AddressDetails({ setCurrentComponent }) {
                     ></input>
                   </div>
                   <div>
-                    <button>{isUpdateAddressForm ? "Update" : "Submit"}</button>
+                    <button>Submit</button>
                   </div>
                 </form>
               </div>
@@ -234,10 +197,8 @@ function AddressDetails({ setCurrentComponent }) {
       <section className="display-address-container">
         {localAdresses.map((address) => (
           <div className="display-address" key={address._id}>
-            <div className="edit-address-container">
-              <button onClick={() => goToUpdateAddressForm(address)}>
-                Edit
-              </button>
+            <div className="edit-address-button-container">
+              <button>Edit</button>
             </div>
             <div className="saved-address-details">
               <div>{address.number}</div>
@@ -247,7 +208,7 @@ function AddressDetails({ setCurrentComponent }) {
               <div>{address.country}</div>
             </div>
             <div className="delete-address-container">
-              <button onClick={onDeleteAddress}>Delete</button>
+              <button>Delete</button>
             </div>
           </div>
         ))}
