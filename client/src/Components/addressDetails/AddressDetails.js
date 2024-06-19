@@ -53,6 +53,9 @@ function AddressDetails({ setCurrentComponent }) {
       if (isSuccess && message === "Address added successfully!") {
         setCurrentComponent("Account");
       }
+      if (isSuccess && message === "Address updated successfully!") {
+        setCurrentComponent("Account");
+      }
     } else {
       setMounted(true);
     }
