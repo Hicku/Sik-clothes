@@ -13,6 +13,7 @@ function Profile({ recentlyViewed, wishlist }) {
   const userData = JSON.parse(localStorage.getItem("user"));
 
   const [currentComponent, setCurrentComponent] = useState("Account");
+  const [selectedAddress, setSelectedAddress] = useState({});
 
   const handleComponentChange = (component) => {
     setCurrentComponent(component);
@@ -27,7 +28,11 @@ function Profile({ recentlyViewed, wishlist }) {
     ),
     "Account details": <AccountDetails />,
     "Address details": (
-      <AddressDetails setCurrentComponent={setCurrentComponent} />
+      <AddressDetails
+        setCurrentComponent={setCurrentComponent}
+        selectedAddress={selectedAddress}
+        setSelectedAddress={setSelectedAddress}
+      />
     ),
     "Change password": <ChangePassword />,
     Contact: <Contact />,

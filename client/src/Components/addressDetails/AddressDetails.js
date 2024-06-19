@@ -2,6 +2,7 @@ import { FaRegAddressCard } from "react-icons/fa6";
 import "./addressDetails.css";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import UpdateAddressForm from "../updateAddressForm/UpdateAddressForm";
 import {
   getAllAddresses,
   addAddress,
@@ -11,8 +12,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 
-function AddressDetails({ setCurrentComponent }) {
-  const [selectedAddress, setSelectedAddress] = useState({});
+function AddressDetails({
+  setCurrentComponent,
+  selectedAddress,
+  setSelectedAddress,
+}) {
   const [isAddressForm, setIsAddressForm] = useState(false);
   const [isUpdateAddressForm, setIsUpdateAddressForm] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -109,6 +113,12 @@ function AddressDetails({ setCurrentComponent }) {
     });
   };
 
+  const goToUpdateAddressForm = (address) => {
+    setSelectedAddress(address);
+    setIsAddressForm(true);
+    setIsUpdateAddressForm(true);
+  };
+
   return (
     <div className="address-page-container">
       <section
@@ -124,66 +134,75 @@ function AddressDetails({ setCurrentComponent }) {
           }`}
         >
           {isAddressForm ? (
-            <div className="new-address">
-              <div className="address-close-button-container">
-                <IoMdClose
-                  onClick={closeNewAddress}
-                  className="address-close-button"
-                />
+            isUpdateAddressForm ? (
+              <UpdateAddressForm
+                selectedAddress={selectedAddress}
+                setIsUpdateAddressForm={setIsUpdateAddressForm}
+                setIsAddressForm={setIsAddressForm}
+              />
+            ) : (
+              <div className="new-address">
+                <div>Add address</div>
+                <div className="address-close-button-container">
+                  <IoMdClose
+                    onClick={closeNewAddress}
+                    className="address-close-button"
+                  />
+                </div>
+                <div className="address-form-container">
+                  <form onSubmit={addNewAddress}>
+                    <div>
+                      <label htmlFor="number">Number</label>
+                      <input
+                        name="number"
+                        onChange={onChange}
+                        value={number}
+                        type="text"
+                      ></input>
+                    </div>
+                    <div>
+                      <label htmlFor="street">Street</label>
+                      <input
+                        name="street"
+                        onChange={onChange}
+                        value={street}
+                        type="text"
+                      ></input>
+                    </div>
+                    <div>
+                      <label htmlFor="city">City</label>
+                      <input
+                        name="city"
+                        onChange={onChange}
+                        value={city}
+                        type="text"
+                      ></input>
+                    </div>
+                    <div>
+                      <label htmlFor="postcode">Postcode</label>
+                      <input
+                        name="postcode"
+                        onChange={onChange}
+                        value={postcode}
+                        type="text"
+                      ></input>
+                    </div>
+                    <div>
+                      <label htmlFor="country">Country</label>
+                      <input
+                        name="country"
+                        onChange={onChange}
+                        value={country}
+                        type="text"
+                      ></input>
+                    </div>
+                    <div>
+                      <button>Submit</button>
+                    </div>
+                  </form>
+                </div>
               </div>
-              <div className="address-form-container">
-                <form onSubmit={addNewAddress}>
-                  <div>
-                    <label htmlFor="number">Number</label>
-                    <input
-                      name="number"
-                      onChange={onChange}
-                      value={number}
-                      type="text"
-                    ></input>
-                  </div>
-                  <div>
-                    <label htmlFor="street">Street</label>
-                    <input
-                      name="street"
-                      onChange={onChange}
-                      value={street}
-                      type="text"
-                    ></input>
-                  </div>
-                  <div>
-                    <label htmlFor="city">City</label>
-                    <input
-                      name="city"
-                      onChange={onChange}
-                      value={city}
-                      type="text"
-                    ></input>
-                  </div>
-                  <div>
-                    <label htmlFor="postcode">Postcode</label>
-                    <input
-                      name="postcode"
-                      onChange={onChange}
-                      value={postcode}
-                      type="text"
-                    ></input>
-                  </div>
-                  <div>
-                    <label htmlFor="country">Country</label>
-                    <input
-                      name="country"
-                      onChange={onChange}
-                      value={country}
-                      type="text"
-                    ></input>
-                  </div>
-                  <div>
-                    <button>Submit</button>
-                  </div>
-                </form>
-              </div>
-            </div>
+            )
           ) : (
             <>
               <FaRegAddressCard className="address-icon" />
@@ -198,7 +217,9 @@ function AddressDetails({ setCurrentComponent }) {
         {localAdresses.map((address) => (
           <div className="display-address" key={address._id}>
             <div className="edit-address-button-container">
-              <button>Edit</button>
+              <button onClick={() => goToUpdateAddressForm(address)}>
+                Edit
+              </button>
             </div>
             <div className="saved-address-details">
               <div>{address.number}</div>
