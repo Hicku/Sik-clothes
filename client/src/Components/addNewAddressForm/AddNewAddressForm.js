@@ -1,75 +1,75 @@
-import "../addressDetails/addressDetails.css";
+import { FaRegAddressCard } from "react-icons/fa6";
+import "../addressDetails/AddressDetails";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { updateAddress, reset } from "../../features/address/addressSlice";
+import { addAddress, reset } from "../../features/address/addressSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdClose } from "react-icons/io";
 
-function UpdateAddressForm({
-  setIsAddressForm,
-  setIsUpdateAddressForm,
-  selectedAddress,
-  setCurrentComponent,
-  setAddressUpdated,
-}) {
-  const { addresses, isError, isSuccess, isLoading, message } = useSelector(
-    (state) => state.address
-  );
-  const [mounted, setMounted] = useState(false);
-  const [updateAddressFormData, setUpdateAddressFormData] = useState({
-    id: selectedAddress._id,
-    number: selectedAddress.number,
-    street: selectedAddress.street,
-    city: selectedAddress.city,
-    postcode: selectedAddress.postcode,
-    country: selectedAddress.country,
-  });
-
-  const { number, street, city, postcode, country } = updateAddressFormData;
-
+function AddNewAddressForm({ setIsAddressForm }) {
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
-    setUpdateAddressFormData({
-      ...updateAddressFormData,
-      [e.target.name]: e.target.value,
-    });
-  };
+  const [addressFormData, setAddressFormData] = useState({
+    number: "",
+    street: "",
+    city: "",
+    postcode: "",
+    country: "",
+    user: JSON.parse(localStorage.getItem("user"))._id,
+  });
 
-  const closeUpdateAddress = () => {
-    setIsUpdateAddressForm(false);
-    setIsAddressForm(false);
-  };
+  const { number, street, city, postcode, country, user } = addressFormData;
 
-  const onUpdateAddress = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-
+  const addNewAddress = (e) => {
+    e.preventDefault();
     const addressData = {
-      id: selectedAddress._id,
       number,
       street,
       city,
       postcode,
       country,
+      user,
     };
 
-    dispatch(updateAddress(addressData));
-    setIsUpdateAddressForm(false);
+    dispatch(addAddress(addressData));
     setIsAddressForm(false);
-    setAddressUpdated(true);
+    setAddressFormData({
+      number: "",
+      street: "",
+      city: "",
+      postcode: "",
+      country: "",
+      user: "",
+    });
+  };
+
+  const onChange = (e) => {
+    setAddressFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const closeNewAddress = () => {
+    setAddressFormData({
+      number: "",
+      street: "",
+      city: "",
+      postcode: "",
+      country: "",
+      user: "",
+    });
+    setIsAddressForm(false);
   };
 
   return (
     <div className="new-address">
-      <div>Update address</div>
+      <div>Add address</div>
       <div className="address-close-button-container">
-        <IoMdClose
-          onClick={closeUpdateAddress}
-          className="address-close-button"
-        />
+        <IoMdClose onClick={closeNewAddress} className="address-close-button" />
       </div>
       <div className="address-form-container">
-        <form onSubmit={onUpdateAddress}>
+        <form onSubmit={addNewAddress}>
           <div>
             <label htmlFor="number">Number</label>
             <input
@@ -124,4 +124,4 @@ function UpdateAddressForm({
   );
 }
 
-export default UpdateAddressForm;
+export default AddNewAddressForm;

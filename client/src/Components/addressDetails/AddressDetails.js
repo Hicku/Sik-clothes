@@ -3,34 +3,22 @@ import "./addressDetails.css";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import UpdateAddressForm from "../updateAddressForm/UpdateAddressForm";
+import AddNewAddressForm from "../addNewAddressForm/AddNewAddressForm";
 import {
   getAllAddresses,
-  addAddress,
   reset,
   deleteAddress,
 } from "../../features/address/addressSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { IoMdClose } from "react-icons/io";
+// import { IoMdClose } from "react-icons/io";
 
-function AddressDetails({
-  setCurrentComponent,
-  selectedAddress,
-  setSelectedAddress,
-}) {
+function AddressDetails({ setCurrentComponent }) {
   const [isAddressForm, setIsAddressForm] = useState(false);
   const [isUpdateAddressForm, setIsUpdateAddressForm] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [addressFormData, setAddressFormData] = useState({
-    number: "",
-    street: "",
-    city: "",
-    postcode: "",
-    country: "",
-    user: JSON.parse(localStorage.getItem("user"))._id,
-  });
   const [localAdresses, setLocalAddresses] = useState([]);
-
-  const { number, street, city, postcode, country, user } = addressFormData;
+  const [selectedAddress, setSelectedAddress] = useState({});
+  const [addressUpdated, setAddressUpdated] = useState(false);
 
   const { addresses, isError, isSuccess, isLoading, message } = useSelector(
     (state) => state.address
@@ -43,17 +31,13 @@ function AddressDetails({
   }, [isError]);
 
   useEffect(() => {
+    if (addressUpdated) {
+      return;
+    }
     if (addresses.length > 0) {
       setLocalAddresses(addresses);
     }
-  }, [addresses]);
-
-  const onChange = (e) => {
-    setAddressFormData((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  };
+  }, [addresses, addressUpdated]);
 
   useEffect(() => {
     if (mounted) {
@@ -76,41 +60,6 @@ function AddressDetails({
 
   const goToAddressForm = () => {
     setIsAddressForm(true);
-  };
-
-  const closeNewAddress = () => {
-    setAddressFormData({
-      number: "",
-      street: "",
-      city: "",
-      postcode: "",
-      country: "",
-      user: "",
-    });
-    setIsAddressForm(false);
-  };
-
-  const addNewAddress = (e) => {
-    e.preventDefault();
-    const addressData = {
-      number,
-      street,
-      city,
-      postcode,
-      country,
-      user,
-    };
-
-    dispatch(addAddress(addressData));
-    setIsAddressForm(false);
-    setAddressFormData({
-      number: "",
-      street: "",
-      city: "",
-      postcode: "",
-      country: "",
-      user: "",
-    });
   };
 
   const goToUpdateAddressForm = (address) => {
@@ -139,69 +88,11 @@ function AddressDetails({
                 selectedAddress={selectedAddress}
                 setIsUpdateAddressForm={setIsUpdateAddressForm}
                 setIsAddressForm={setIsAddressForm}
+                setCurrentComponent={setCurrentComponent}
+                setAddressUpdated={setAddressUpdated}
               />
             ) : (
-              <div className="new-address">
-                <div>Add address</div>
-                <div className="address-close-button-container">
-                  <IoMdClose
-                    onClick={closeNewAddress}
-                    className="address-close-button"
-                  />
-                </div>
-                <div className="address-form-container">
-                  <form onSubmit={addNewAddress}>
-                    <div>
-                      <label htmlFor="number">Number</label>
-                      <input
-                        name="number"
-                        onChange={onChange}
-                        value={number}
-                        type="text"
-                      ></input>
-                    </div>
-                    <div>
-                      <label htmlFor="street">Street</label>
-                      <input
-                        name="street"
-                        onChange={onChange}
-                        value={street}
-                        type="text"
-                      ></input>
-                    </div>
-                    <div>
-                      <label htmlFor="city">City</label>
-                      <input
-                        name="city"
-                        onChange={onChange}
-                        value={city}
-                        type="text"
-                      ></input>
-                    </div>
-                    <div>
-                      <label htmlFor="postcode">Postcode</label>
-                      <input
-                        name="postcode"
-                        onChange={onChange}
-                        value={postcode}
-                        type="text"
-                      ></input>
-                    </div>
-                    <div>
-                      <label htmlFor="country">Country</label>
-                      <input
-                        name="country"
-                        onChange={onChange}
-                        value={country}
-                        type="text"
-                      ></input>
-                    </div>
-                    <div>
-                      <button>Submit</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
+              <AddNewAddressForm setIsAddressForm={setIsAddressForm} />
             )
           ) : (
             <>

@@ -17,6 +17,12 @@ const addAddress = async (address) => {
   return response.data;
 };
 
+const updateAddress = async (address) => {
+  const response = await axios.put(API_URL + address.id, address);
+
+  return response.data;
+};
+
 // delete address
 const deleteAddress = async (addressId) => {
   const response = await axios.delete(API_URL + addressId, {});
@@ -40,6 +46,7 @@ const addressService = {
   addAddress,
   deleteAddress,
   getAllAddresses,
+  updateAddress,
 };
 
 export default addressService;

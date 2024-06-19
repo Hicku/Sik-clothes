@@ -27,6 +27,25 @@ export const addAddress = createAsyncThunk(
   }
 );
 
+// update address
+
+export const updateAddress = createAsyncThunk(
+  "address/updateAddress",
+  async (address, thunkAPI) => {
+    try {
+      return await addressService.updateAddress(address);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // delete address
 export const deleteAddress = createAsyncThunk(
   "address/deleteAddress",
@@ -94,6 +113,20 @@ export const addressSlice = createSlice({
         state.addresses.push(action.payload);
       })
       .addCase(addAddress.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(updateAddress.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateAddress.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = "Address updated successfully!";
+        state.addresses.push(action.payload);
+      })
+      .addCase(updateAddress.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
