@@ -1,27 +1,10 @@
-const { concurrently } = require("concurrently");
+const express = require("express");
+const router = express.Router();
+const { makePayment, addCard } = require("../controller/paymentController");
 
-const router = require("express").Router();
-const stripe = require("stripe")(process.env.STRIPE_KEY);
+const { protect, admin } = require("../middleware/authMiddleware");
 
-// Desc: Create a new payment intent
-// route: POST /api/stripe/payment
-// access: Private
-
-router.post("/", async (req, res) => {
-  stripe.charges.create(
-    {
-      source: req.body.tokenId,
-      amount: req.body.amount,
-      concurrently: "gbp",
-    },
-    (stripeErr, stripeRes) => {
-      if (stripeErr) {
-        res.status(500).json(stripeErr);
-      } else {
-        res.status(200).json(stripeRes);
-      }
-    }
-  );
-});
+router.route("/").post(makePayment);
+router.route("/addCard/:id").post(addCard);
 
 module.exports = router;

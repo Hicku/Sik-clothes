@@ -1,13 +1,65 @@
-.credit-card-form {
-  background: linear-gradient(25deg, #fff, #eee);
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.add-card-container {
+  width: 100%;
 }
 
-.credit-card-input {
-  margin-bottom: 10px;
+.credit-card-form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #b7b7b7;
+}
+
+.credit-card-form div {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.credit-card-form label {
+  display: flex;
+  justify-content: start;
+  font-size: 15px;
+  font-weight: 300;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.credit-card-form input {
+  height: 40px;
+  width: 80%;
+  padding-left: 5px;
+  border: 1px solid #454545;
+}
+
+.credit-card-form button {
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 12px;
+  background-color: #454545;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 80%;
+  margin-top: 20px;
+}
+
+.credit-card-form button:hover {
+  background-color: #218838;
+}
+
+.form-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.StripeElement {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #454545;
+  width: 80%;
+  margin-top: 20px;
 }

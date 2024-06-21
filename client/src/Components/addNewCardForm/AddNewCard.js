@@ -1,54 +1,110 @@
 import "./addNewCard.css";
+import {
+  CardNumberElement,
+  CardExpiryElement,
+  CardCvcElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { addCard, reset } from "../../features/auth/authSlice";
 
-import React, { useState } from "react";
-
+// initial state of the form
 const CreditCardForm = () => {
   const [cardInfo, setCardInfo] = useState({
     number: "",
-    name: "",
-    expiry: "",
+    expDate: "",
     cvc: "",
+    name: "",
   });
+
+  const stripe = useStripe();
+  const elements = useElements();
+  const dispatch = useDispatch();
+
+  const { isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.payment
+  );
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setCardInfo({ ...cardInfo, [name]: value });
   };
 
-  // Additional form handling logic will be added here
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  };
 
   return (
-    <form>
-      <input
-        type="text"
-        name="number"
-        value={cardInfo.number}
-        onChange={handleInputChange}
-        placeholder="Card Number"
-      />
-      <input
-        type="text"
-        name="name"
-        value={cardInfo.name}
-        onChange={handleInputChange}
-        placeholder="Cardholder Name"
-      />
-      <input
-        type="text"
-        name="expiry"
-        value={cardInfo.expiry}
-        onChange={handleInputChange}
-        placeholder="Expiry Date"
-      />
-      <input
-        type="text"
-        name="cvc"
-        value={cardInfo.cvc}
-        onChange={handleInputChange}
-        placeholder="CVC"
-      />
-      {/* Additional inputs and elements will be added here */}
-    </form>
+    <div className="add-card-container">
+      <form className="credit-card-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={cardInfo.name}
+          onChange={handleInputChange}
+          required
+        />
+        <div className="form-row">
+          <CardNumberElement
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  "::placeholder": {
+                    color: "#aab7c4",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
+                },
+              },
+            }}
+          />
+        </div>
+        <div className="form-row">
+          <CardExpiryElement
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  "::placeholder": {
+                    color: "#aab7c4",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
+                },
+              },
+            }}
+          />
+        </div>
+        <div className="form-row">
+          <CardCvcElement
+            options={{
+              style: {
+                base: {
+                  fontSize: "16px",
+                  color: "#424770",
+                  "::placeholder": {
+                    color: "#aab7c4",
+                  },
+                },
+                invalid: {
+                  color: "#9e2146",
+                },
+              },
+            }}
+          />
+        </div>
+        <button type="submit">Add Card</button>
+      </form>
+    </div>
   );
 };
 
