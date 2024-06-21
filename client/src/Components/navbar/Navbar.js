@@ -4,6 +4,7 @@ import "./nav.css";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../features/auth/authSlice";
 import CategoryBar from "../categoryBar/categoryBar";
+import logoImage from "../../images/clothes-logo.png";
 
 export default function Navabar({ isOpen, setIsOpen }) {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ export default function Navabar({ isOpen, setIsOpen }) {
       </div>
       <section className="nav-btn-container">
         <NavLink to={"/"} className="logo">
-          Logo
+          <img src={logoImage} alt="logo" />
         </NavLink>
         <ul className="links">
           {user ? (

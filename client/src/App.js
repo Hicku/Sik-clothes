@@ -5,11 +5,13 @@ import Login from "./Pages/login/Login";
 import Register from "./Pages/register/Register";
 import Navabar from "./Components/navbar/Navbar";
 import ProductPage from "./Pages/productPage/ProductPage";
+import Pay from "./Pages/pay/Pay";
+import WishListPage from "./Pages/wishListPage/WishListPage";
+import PaymentSuccess from "./Pages/paymentSuccess/PaymentSuccess";
 import { useState, useEffect } from "react";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import WishListPage from "./Pages/wishListPage/WishListPage";
 
 function App() {
   // Used to toggle the search sidebar
@@ -94,6 +96,8 @@ function App() {
                   path="/wishlist"
                   element={<WishListPage wishlist={wishlist} />}
                 />
+                <Route path="/pay" element={<Pay />} />
+                <Route path="/success" element={<PaymentSuccess />} />
               </Routes>
             </main>
           </section>
