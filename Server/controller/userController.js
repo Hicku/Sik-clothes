@@ -62,7 +62,7 @@ const getMe = asyncHandler(async (req, res) => {
 // access: Public
 
 const registerUser = asyncHandler(async (req, res) => {
-  const { name, lastName, dateOfBirth, email, password } = req.body;
+  const { name, lastName, dateOfBirth, email, password, customerId } = req.body;
 
   // Check for name, email and password fields
   if (!name || !email || !lastName || !dateOfBirth || !password) {
@@ -90,6 +90,7 @@ const registerUser = asyncHandler(async (req, res) => {
     dateOfBirth,
     email,
     password: hashedPassword,
+    customerId,
   });
 
   // Return user data

@@ -4,6 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { register, reset } from "../../features/auth/authSlice";
+import {
+  createCustomer,
+  reset as paymentReset,
+} from "../../features/payments/paymentSlice";
 import Spinner from "../../Components/navbar/spinner/spinner";
 
 function Register() {
@@ -25,17 +29,41 @@ function Register() {
     (state) => state.auth
   );
 
+  const {
+    customerId,
+    isSuccess: isCustomerCreated,
+    isError: isCustomerError,
+    isLoading: isCustomerLoading,
+    message: customerMessage,
+  } = useSelector((state) => state.payment);
+
   useEffect(() => {
     if (isError) {
       toast.error(message);
+    }
+
+    if (isCustomerError) {
+      toast.error(customerMessage);
     }
 
     if (isSuccess || user) {
       toast.success(message);
       navigate("/");
     }
+
     dispatch(reset());
-  }, [user, isError, isSuccess, message, navigate, dispatch]);
+    dispatch(paymentReset());
+  }, [
+    user,
+    isError,
+    isCustomerError,
+    isSuccess,
+    isCustomerCreated,
+    message,
+    customerMessage,
+    navigate,
+    dispatch,
+  ]);
 
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -58,7 +86,24 @@ function Register() {
         password,
       };
 
-      dispatch(register(userData));
+      const customerData = {
+        name: userData.name,
+        email: userData.email,
+      };
+
+      dispatch(createCustomer(customerData));
+
+      console.log(customerId);
+
+      if (isCustomerCreated) {
+        const registrationData = {
+          ...userData,
+          customerId,
+        };
+        dispatch(register(registrationData));
+      } else {
+        console.log("error creating customer");
+      }
     }
   };
 

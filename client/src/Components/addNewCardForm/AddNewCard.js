@@ -9,7 +9,7 @@ import {
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { addCard, reset } from "../../features/auth/authSlice";
+import { addCard, reset } from "../../features/payments/paymentSlice";
 
 // initial state of the form
 const CreditCardForm = () => {
@@ -17,7 +17,6 @@ const CreditCardForm = () => {
     number: "",
     expDate: "",
     cvc: "",
-    name: "",
   });
 
   const stripe = useStripe();
@@ -35,6 +34,7 @@ const CreditCardForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    addCard();
   };
 
   return (

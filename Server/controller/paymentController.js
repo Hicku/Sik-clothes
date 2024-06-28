@@ -13,10 +13,8 @@ const addCard = asyncHandler(async (req, res) => {
       type: "card",
       card: {
         number: cardInfo.number,
-        exp_month: cardInfo.exp_month,
-        exp_year: cardInfo.exp_year,
+        expDate: cardInfo.expDate,
         cvc: cardInfo.cvc,
-        name: cardInfo.name,
       },
     });
 
@@ -36,6 +34,25 @@ const addCard = asyncHandler(async (req, res) => {
   } catch (error) {
     console.error("Error adding card:", error);
     res.status(500).json({ error: "Failed to add card" });
+  }
+});
+
+// @desc    Create a Stripe customer and return customer ID
+// @route   POST /api/customers
+// @access  Private
+const createCustomer = asyncHandler(async (req, res) => {
+  const { email, name } = req.body;
+
+  try {
+    const customer = await stripe.customers.create({
+      email,
+      name,
+    });
+
+    res.status(201).json({ customerId: customer.id });
+  } catch (error) {
+    console.error("Error creating customer:", error);
+    res.status(500).json({ error: "Failed to create customer" });
   }
 });
 
@@ -71,4 +88,5 @@ const makePayment = asyncHandler(async (req, res) => {
 module.exports = {
   addCard,
   makePayment,
+  createCustomer,
 };

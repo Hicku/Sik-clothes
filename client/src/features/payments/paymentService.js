@@ -14,9 +14,15 @@ const addCard = async (userId) => {
   return response.data;
 };
 
+const createCustomer = async (userData) => {
+  const response = await axios.post(`${API_URL}/createCustomer`, userData);
+  return response.data;
+};
+
 const productService = {
   makePayment,
   addCard,
+  createCustomer,
 };
 
 export default productService;
