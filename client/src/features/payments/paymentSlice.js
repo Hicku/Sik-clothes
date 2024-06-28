@@ -3,6 +3,7 @@ import paymentService from "./paymentService";
 
 const initialState = {
   payments: [],
+  customerId: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -71,41 +72,41 @@ export const paymentSlice = createSlice({
       .addCase(makePayment.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(makePayment.fulfilled, (state, { payload }) => {
+      .addCase(makePayment.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.payments = payload;
+        state.payments = action.payload;
       })
-      .addCase(makePayment.rejected, (state, { payload }) => {
+      .addCase(makePayment.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = payload;
+        state.message = action.payload;
       })
       .addCase(addCard.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(addCard.fulfilled, (state, { payload }) => {
+      .addCase(addCard.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.payments = payload;
+        state.payments = action.payload;
       })
-      .addCase(addCard.rejected, (state, { payload }) => {
+      .addCase(addCard.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = payload;
+        state.message = action.payload;
       })
       .addCase(createCustomer.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createCustomer.fulfilled, (state, { payload }) => {
+      .addCase(createCustomer.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.customerId = payload.customerId;
+        state.customerId = action.payload.customerId;
       })
-      .addCase(createCustomer.rejected, (state, { payload }) => {
+      .addCase(createCustomer.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = payload;
+        state.message = action.payload;
       });
   },
 });

@@ -65,6 +65,22 @@ function Register() {
     dispatch,
   ]);
 
+  useEffect(() => {
+    console.log(customerId);
+    if (isCustomerCreated) {
+      const userData = {
+        name,
+        lastName,
+        dateOfBirth,
+        email,
+        password,
+        customerId,
+      };
+
+      dispatch(register(userData));
+    }
+  }, [isCustomerCreated, customerId, dispatch]);
+
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -78,32 +94,14 @@ function Register() {
     if (password !== password2) {
       toast.error("Passwords do not match");
     } else {
-      const userData = {
+      const customerData = {
         name,
-        lastName,
-        dateOfBirth,
         email,
-        password,
       };
 
-      const customerData = {
-        name: userData.name,
-        email: userData.email,
-      };
+      console.log(customerData);
 
       dispatch(createCustomer(customerData));
-
-      console.log(customerId);
-
-      if (isCustomerCreated) {
-        const registrationData = {
-          ...userData,
-          customerId,
-        };
-        dispatch(register(registrationData));
-      } else {
-        console.log("error creating customer");
-      }
     }
   };
 

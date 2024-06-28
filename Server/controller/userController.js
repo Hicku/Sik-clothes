@@ -101,6 +101,7 @@ const registerUser = asyncHandler(async (req, res) => {
       lastName: user.lastName,
       dateOfBirth: user.dateOfBirth,
       email: user.email,
+      customerId: user.customerId,
       token: generateToken(user._id),
     });
   } else {
