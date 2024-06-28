@@ -8,8 +8,11 @@ const makePayment = async () => {
   return response.data;
 };
 
-const addCard = async (userId) => {
-  const response = await axios.post(`${API_URL}/addCard/${userId}`);
+const addCard = async (customerId, token) => {
+  const response = await axios.post(`${API_URL}/addCard`, {
+    customerId,
+    token,
+  });
 
   return response.data;
 };

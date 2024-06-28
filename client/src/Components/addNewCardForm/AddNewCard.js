@@ -13,11 +13,8 @@ import { addCard, reset } from "../../features/payments/paymentSlice";
 
 // initial state of the form
 const CreditCardForm = () => {
-  const [cardInfo, setCardInfo] = useState({
-    number: "",
-    expDate: "",
-    cvc: "",
-  });
+  const user = JSON.parse(localStorage.getItem("user"));
+  const customerId = user.customerId;
 
   const stripe = useStripe();
   const elements = useElements();
@@ -27,27 +24,49 @@ const CreditCardForm = () => {
     (state) => state.payment
   );
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setCardInfo({ ...cardInfo, [name]: value });
-  };
+  // const handleInputChange = (e) => {
+  //   const { name, value } = e.target;
+  //   setCardInfo({ ...cardInfo, [name]: value });
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    addCard();
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    const cardNumberElement = elements.getElement(CardNumberElement);
+    const cardExpiryElement = elements.getElement(CardExpiryElement);
+    const cardCvcElement = elements.getElement(CardCvcElement);
+
+    if (!cardNumberElement || !cardExpiryElement || !cardCvcElement) {
+      return;
+    }
+
+    const { token, error } = await stripe.createToken(cardNumberElement);
+
+    console.log(token);
+
+    if (error) {
+      console.log("Error creating token", error);
+      toast.error("Error adding card");
+    } else {
+      dispatch(addCard({ customerId, token: token.id }));
+    }
   };
 
   return (
     <div className="add-card-container">
       <form className="credit-card-form" onSubmit={handleSubmit}>
-        <input
+        {/* <input
           type="text"
           name="name"
           placeholder="Name"
           value={cardInfo.name}
           onChange={handleInputChange}
           required
-        />
+        /> */}
         <div className="form-row">
           <CardNumberElement
             options={{

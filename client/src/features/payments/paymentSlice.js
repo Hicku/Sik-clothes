@@ -29,9 +29,9 @@ export const makePayment = createAsyncThunk(
 
 export const addCard = createAsyncThunk(
   "payments/addCard",
-  async ({ userId, paymentMethodId }, thunkAPI) => {
+  async ({ customerId, token }, thunkAPI) => {
     try {
-      return await paymentService.addCard(userId, paymentMethodId);
+      return await paymentService.addCard(customerId, token);
     } catch (error) {
       const message =
         (error.response &&

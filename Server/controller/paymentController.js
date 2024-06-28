@@ -5,16 +5,16 @@ const stripe = require("stripe")(process.env.STRIPE_KEY);
 // @route   POST /api/cards/add
 // @access  Private (example: requires authentication)
 const addCard = asyncHandler(async (req, res) => {
-  const { customerId, cardInfo } = req.body;
+  const { customerId, token } = req.body;
+
+  console.log("Received customerId:", customerId);
+  console.log("Received token:", token);
 
   try {
-    // Create a PaymentMethod with card details
     const paymentMethod = await stripe.paymentMethods.create({
       type: "card",
       card: {
-        number: cardInfo.number,
-        expDate: cardInfo.expDate,
-        cvc: cardInfo.cvc,
+        token: token,
       },
     });
 

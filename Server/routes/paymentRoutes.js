@@ -9,7 +9,7 @@ const {
 const { protect, admin } = require("../middleware/authMiddleware");
 
 router.route("/").post(makePayment);
-router.route("/addCard/:id").post(addCard);
+router.route("/addCard").post(addCard);
 router.route("/createCustomer").post(createCustomer);
 
 module.exports = router;
