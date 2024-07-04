@@ -11,7 +11,7 @@ const { useState } = require("react");
 
 function Profile({ recentlyViewed, wishlist }) {
   const userData = JSON.parse(localStorage.getItem("user"));
-
+  const [isAddCard, setIsAddCard] = useState(false);
   const [currentComponent, setCurrentComponent] = useState("Account");
 
   const handleComponentChange = (component) => {
@@ -32,7 +32,9 @@ function Profile({ recentlyViewed, wishlist }) {
     "Change password": <ChangePassword />,
     Contact: <Contact />,
     "Order History": <OrderHistory />,
-    "Payment details": <PaymentDetails />,
+    "Payment details": (
+      <PaymentDetails isAddCard={isAddCard} setIsAddCard={setIsAddCard} />
+    ),
     Wishlist: (
       <Wishlist wishlist={wishlist} currentComponent={currentComponent} />
     ),

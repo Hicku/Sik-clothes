@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addCard, reset } from "../../features/payments/paymentSlice";
 
 // initial state of the form
-const CreditCardForm = () => {
+const CreditCardForm = ({ setIsAddCard }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const customerId = user.customerId;
 
@@ -45,8 +45,7 @@ const CreditCardForm = () => {
     }
 
     const { token, error } = await stripe.createToken(cardNumberElement);
-
-    console.log(token);
+    setIsAddCard(false);
 
     if (error) {
       console.log("Error creating token", error);

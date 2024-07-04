@@ -128,7 +128,6 @@
   overflow: scroll;
   overflow-x: hidden;
   flex-grow: 1;
-  padding-bottom: 20px;
 }
 
 .display-address {
@@ -138,6 +137,12 @@
   border-right: 1px solid #b7b7b7;
   width: 50%;
   height: 50%;
+  padding-top: 15px;
+  padding-bottom: -3px;
+}
+
+.display-address.no-border {
+  border-bottom: none;
 }
 
 /* width */

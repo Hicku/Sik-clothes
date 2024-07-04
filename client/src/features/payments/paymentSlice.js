@@ -4,11 +4,29 @@ import paymentService from "./paymentService";
 const initialState = {
   payments: [],
   customerId: null,
+  cards: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: "",
 };
+
+export const getCards = createAsyncThunk(
+  "payments/getCards",
+  async (customerId, thunkAPI) => {
+    try {
+      return await paymentService.getCards(customerId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
 
 export const makePayment = createAsyncThunk(
   "payments/makePayment",
@@ -104,6 +122,19 @@ export const paymentSlice = createSlice({
         state.customerId = action.payload.customerId;
       })
       .addCase(createCustomer.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getCards.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCards.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.cards = action.payload.paymentMethods.data;
+      })
+      .addCase(getCards.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

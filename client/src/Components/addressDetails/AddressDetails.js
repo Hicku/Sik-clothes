@@ -1,6 +1,6 @@
 import { FaRegAddressCard } from "react-icons/fa6";
 import "./addressDetails.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import UpdateAddressForm from "../updateAddressForm/UpdateAddressForm";
 import AddNewAddressForm from "../addNewAddressForm/AddNewAddressForm";
@@ -71,6 +71,19 @@ function AddressDetails({ setCurrentComponent }) {
     setIsUpdateAddressForm(true);
   };
 
+  const toggleAddressClass = (index, length) => {
+    if (length % 2 === 0) {
+      if (index === length - 1 || index === length - 2) {
+        return "display-address no-border";
+      }
+    } else {
+      if (index === length - 1) {
+        return "display-address no-border";
+      }
+    }
+    return "display-address";
+  };
+
   return (
     <div className="address-page-container">
       <section
@@ -108,8 +121,11 @@ function AddressDetails({ setCurrentComponent }) {
         </div>
       </section>
       <section className="display-address-container">
-        {localAdresses.map((address) => (
-          <div className="display-address" key={address._id}>
+        {localAdresses.map((address, index) => (
+          <div
+            className={toggleAddressClass(index, localAdresses.length)}
+            key={address._id}
+          >
             <div className="edit-address-button-container">
               <button onClick={() => goToUpdateAddressForm(address)}>
                 Edit

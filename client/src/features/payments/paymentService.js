@@ -2,6 +2,16 @@ import axios from "axios";
 
 const API_URL = "/api/payments/";
 
+const getCards = async (customerId) => {
+  const response = await axios.get(`${API_URL}/getCards`, {
+    params: {
+      customerId,
+    },
+  });
+
+  return response.data;
+};
+
 const makePayment = async () => {
   const response = await axios.post(API_URL);
 
@@ -26,6 +36,7 @@ const productService = {
   makePayment,
   addCard,
   createCustomer,
+  getCards,
 };
 
 export default productService;
