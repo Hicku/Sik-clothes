@@ -15,6 +15,25 @@ const getCards = asyncHandler(async (req, res) => {
   res.status(200).json({ paymentMethods });
 });
 
+// @desc    Delete cards for a customer
+// @route   DELETE /api/card
+const deleteCard = asyncHandler(async (req, res) => {
+  const { paymentMethodId } = req.params;
+
+  try {
+    const detachedPaymentMethod = await stripe.paymentMethods.detach(
+      paymentMethodId
+    );
+    res
+      .status(200)
+      .json({ message: "Card deleted", paymentMethod: detachedPaymentMethod });
+  } catch (error) {
+    res
+      .status(400)
+      .json({ message: "Failed to delete card", error: error.message });
+  }
+});
+
 // @desc    Add a new card for a customer
 // @route   POST /api/cards/add
 // @access  Private (example: requires authentication)
@@ -85,6 +104,7 @@ const makePayment = asyncHandler(async (req, res) => {
 
 module.exports = {
   getCards,
+  deleteCard,
   addCard,
   createCustomer,
   makePayment,

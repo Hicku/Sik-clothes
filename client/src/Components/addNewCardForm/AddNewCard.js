@@ -9,10 +9,10 @@ import {
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
-import { addCard, reset } from "../../features/payments/paymentSlice";
+import { addCard, getCards, reset } from "../../features/payments/paymentSlice";
 
 // initial state of the form
-const CreditCardForm = ({ setIsAddCard }) => {
+const AddNewCardForm = ({ setIsAddCard, isAddCard }) => {
   const user = JSON.parse(localStorage.getItem("user"));
   const customerId = user.customerId;
 
@@ -45,14 +45,16 @@ const CreditCardForm = ({ setIsAddCard }) => {
     }
 
     const { token, error } = await stripe.createToken(cardNumberElement);
-    setIsAddCard(false);
 
     if (error) {
       console.log("Error creating token", error);
       toast.error("Error adding card");
     } else {
-      dispatch(addCard({ customerId, token: token.id }));
+      dispatch(addCard({ customerId, token: token.id })).then(() => {
+        dispatch(getCards(customerId));
+      });
     }
+    setIsAddCard(false);
   };
 
   return (
@@ -84,6 +86,7 @@ const CreditCardForm = ({ setIsAddCard }) => {
             }}
           />
         </div>
+        <div></div>
         <div className="form-row">
           <CardExpiryElement
             options={{
@@ -126,4 +129,4 @@ const CreditCardForm = ({ setIsAddCard }) => {
   );
 };
 
-export default CreditCardForm;
+export default AddNewCardForm;

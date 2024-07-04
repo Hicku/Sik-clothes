@@ -12,6 +12,14 @@ const getCards = async (customerId) => {
   return response.data;
 };
 
+const deleteCard = async (paymentMethodId) => {
+  const response = await axios.delete(
+    `${API_URL}/deleteCard/${paymentMethodId}`
+  );
+
+  return response.data;
+};
+
 const makePayment = async () => {
   const response = await axios.post(API_URL);
 
@@ -37,6 +45,7 @@ const productService = {
   addCard,
   createCustomer,
   getCards,
+  deleteCard,
 };
 
 export default productService;

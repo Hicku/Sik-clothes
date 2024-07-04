@@ -5,6 +5,7 @@ const initialState = {
   payments: [],
   customerId: null,
   cards: [],
+  paymentMethodId: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -16,6 +17,23 @@ export const getCards = createAsyncThunk(
   async (customerId, thunkAPI) => {
     try {
       return await paymentService.getCards(customerId);
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const deleteCard = createAsyncThunk(
+  "payments/deleteCard",
+  async (paymentMethodId, thunkAPI) => {
+    try {
+      return paymentService.deleteCard(paymentMethodId);
     } catch (error) {
       const message =
         (error.response &&
@@ -135,6 +153,19 @@ export const paymentSlice = createSlice({
         state.cards = action.payload.paymentMethods.data;
       })
       .addCase(getCards.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteCard.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteCard.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.cards = action.payload;
+      })
+      .addCase(deleteCard.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
