@@ -21,15 +21,20 @@ export default function Navabar({ isOpen, setIsOpen }) {
     setIsOpen(!isOpen);
   };
 
+  const handleGoHome = () => {
+    localStorage.setItem("selectedCategory", "all");
+    navigate("/");
+  };
+
   return (
     <nav className="nav-container">
       <div className="top-bar">
         <div className="banner">£10 off orders over £70</div>
       </div>
       <section className="nav-btn-container">
-        <NavLink to={"/"} className="logo">
+        <button onClick={handleGoHome} className="logo">
           <img src={logoImage} alt="logo" />
-        </NavLink>
+        </button>
         <ul className="links">
           {user ? (
             <>

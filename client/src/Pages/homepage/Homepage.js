@@ -24,7 +24,14 @@ function Homepage({
       console.log(message);
     }
 
-    dispatch(getProducts());
+    const selectedCategory = localStorage.getItem("selectedCategory");
+    console.log(selectedCategory);
+
+    if (selectedCategory !== "all") {
+      return;
+    } else {
+      dispatch(getProducts());
+    }
 
     return () => {
       dispatch(reset());

@@ -1,5 +1,6 @@
 import "./categoryBar.css";
 import { useSelector, useDispatch } from "react-redux";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import {
   getCategory,
@@ -9,14 +10,16 @@ import {
 
 function CategoryBar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const { isLoading, isError, message } = useSelector((state) => state.product);
 
-  const [isSelected, setIsSelected] = useState("all");
+  const [isSelected, setIsSelected] = useState(
+    localStorage.getItem("selectedCatergory") || "all"
+  );
 
   const onClickCategory = (e) => {
-    e.preventDefault();
-
     const category = e.target.name;
 
     if (isError) {
@@ -24,25 +27,24 @@ function CategoryBar() {
     }
 
     dispatch(getCategory(category));
-
     setIsSelected(category);
-
+    localStorage.setItem("selectedCategory", category);
     dispatch(reset());
+    navigate("/");
   };
 
-  const onClickAll = (e) => {
-    e.preventDefault();
-
+  const onClickAll = () => {
     if (isError) {
       console.log(message);
     }
 
     dispatch(getProducts());
-
     setIsSelected("all");
-
     dispatch(reset());
+    navigate("/");
   };
+
+  const isHomePage = location.pathname === "/";
 
   return (
     <div className="cat-bar-container">
@@ -52,7 +54,9 @@ function CategoryBar() {
             name="all"
             onClick={onClickAll}
             className={
-              isSelected === "all" ? "cat-button-selected" : "cat-button"
+              isSelected === "all" && isHomePage
+                ? "cat-button-selected"
+                : "cat-button"
             }
           >
             All
@@ -63,7 +67,9 @@ function CategoryBar() {
             onClick={onClickCategory}
             name="t-shirts"
             className={
-              isSelected === "t-shirts" ? "cat-button-selected" : "cat-button"
+              isSelected === "t-shirts" && isHomePage
+                ? "cat-button-selected"
+                : "cat-button"
             }
           >
             T-shirts
@@ -74,7 +80,9 @@ function CategoryBar() {
             onClick={onClickCategory}
             name="trousers"
             className={
-              isSelected === "trousers" ? "cat-button-selected" : "cat-button"
+              isSelected === "trousers" && isHomePage
+                ? "cat-button-selected"
+                : "cat-button"
             }
           >
             Trousers
@@ -85,7 +93,9 @@ function CategoryBar() {
             onClick={onClickCategory}
             name="coats"
             className={
-              isSelected === "coats" ? "cat-button-selected" : "cat-button"
+              isSelected === "coats" && isHomePage
+                ? "cat-button-selected"
+                : "cat-button"
             }
           >
             Coats
@@ -96,7 +106,9 @@ function CategoryBar() {
             onClick={onClickCategory}
             name="jackets"
             className={
-              isSelected === "jackets" ? "cat-button-selected" : "cat-button"
+              isSelected === "jackets" && isHomePage
+                ? "cat-button-selected"
+                : "cat-button"
             }
           >
             Jackets
@@ -107,7 +119,9 @@ function CategoryBar() {
             onClick={onClickCategory}
             name="socks"
             className={
-              isSelected === "socks" ? "cat-button-selected" : "cat-button"
+              isSelected === "socks" && isHomePage
+                ? "cat-button-selected"
+                : "cat-button"
             }
           >
             Socks
@@ -118,7 +132,9 @@ function CategoryBar() {
             onClick={onClickCategory}
             name="footwear"
             className={
-              isSelected === "footwear" ? "cat-button-selected" : "cat-button"
+              isSelected === "footwear" && isHomePage
+                ? "cat-button-selected"
+                : "cat-button"
             }
           >
             Footwear
@@ -129,7 +145,9 @@ function CategoryBar() {
             onClick={onClickCategory}
             name="hats"
             className={
-              isSelected === "hats" ? "cat-button-selected" : "cat-button"
+              isSelected === "hats" && isHomePage
+                ? "cat-button-selected"
+                : "cat-button"
             }
           >
             Hats
@@ -140,7 +158,9 @@ function CategoryBar() {
             onClick={onClickCategory}
             name="gloves"
             className={
-              isSelected === "gloves" ? "cat-button-selected" : "cat-button"
+              isSelected === "gloves" && isHomePage
+                ? "cat-button-selected"
+                : "cat-button"
             }
           >
             Gloves
