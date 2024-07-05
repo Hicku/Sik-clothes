@@ -59,6 +59,8 @@ function App() {
                       setIsOpen={setIsOpen}
                       recentlyViewed={recentlyViewed}
                       wishlist={wishlist}
+                      setSelectedProduct={setSelectedProduct}
+                      setRecentlyViewed={setRecentlyViewed}
                     />
                   }
                 />
@@ -94,7 +96,12 @@ function App() {
                 />
                 <Route
                   path="/wishlist"
-                  element={<WishListPage wishlist={wishlist} />}
+                  element={
+                    <WishListPage
+                      wishlist={wishlist}
+                      setSelectedProduct={setSelectedProduct}
+                    />
+                  }
                 />
                 <Route path="/pay" element={<Pay />} />
                 <Route path="/success" element={<PaymentSuccess />} />

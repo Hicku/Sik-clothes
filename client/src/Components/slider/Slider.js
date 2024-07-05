@@ -5,7 +5,13 @@ import "./slider.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-function CustomSlider({ recentlyViewed, currentComponent, wishlist }) {
+function CustomSlider({
+  recentlyViewed,
+  currentComponent,
+  wishlist,
+  setSelectedProduct,
+  setRecentlyViewed,
+}) {
   var settings = {
     dots: false,
     infinite: true,
@@ -23,6 +29,8 @@ function CustomSlider({ recentlyViewed, currentComponent, wishlist }) {
               key={product.id}
               product={product}
               currentComponent={currentComponent}
+              setSelectedProduct={setSelectedProduct}
+              setRecentlyViewed={setRecentlyViewed}
             />
           ))}
         </Slider>
@@ -33,6 +41,8 @@ function CustomSlider({ recentlyViewed, currentComponent, wishlist }) {
               key={product.id}
               product={product}
               currentComponent={currentComponent}
+              setSelectedProduct={setSelectedProduct}
+              setRecentlyViewed={setRecentlyViewed}
             />
           ))}
         </Slider>

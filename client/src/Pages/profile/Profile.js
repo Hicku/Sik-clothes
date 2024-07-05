@@ -9,7 +9,12 @@ import PaymentDetails from "../../Components/paymentDetails/PaymentDetails";
 import Wishlist from "../../Components/wishlist/Wishlist";
 const { useState } = require("react");
 
-function Profile({ recentlyViewed, wishlist }) {
+function Profile({
+  recentlyViewed,
+  wishlist,
+  setSelectedProduct,
+  setRecentlyViewed,
+}) {
   const userData = JSON.parse(localStorage.getItem("user"));
   const [isAddCard, setIsAddCard] = useState(false);
   const [currentComponent, setCurrentComponent] = useState("Account");
@@ -23,6 +28,8 @@ function Profile({ recentlyViewed, wishlist }) {
       <Account
         recentlyViewed={recentlyViewed}
         currentComponent={currentComponent}
+        setSelectedProduct={setSelectedProduct}
+        setRecentlyViewed={setRecentlyViewed}
       />
     ),
     "Account details": <AccountDetails />,
