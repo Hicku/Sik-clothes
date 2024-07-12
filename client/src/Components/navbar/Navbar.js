@@ -1,4 +1,7 @@
-import { FaSignInAlt, FaUser, FaSignOutAlt } from "react-icons/fa";
+import { FaSignInAlt, FaUser } from "react-icons/fa";
+import { CiLogout, CiSearch } from "react-icons/ci";
+import { PiShoppingCartSimpleLight } from "react-icons/pi";
+
 import { NavLink, useNavigate } from "react-router-dom";
 import "./nav.css";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,7 +9,7 @@ import { logout, reset } from "../../features/auth/authSlice";
 import CategoryBar from "../categoryBar/categoryBar";
 import logoImage from "../../images/clothes-logo.png";
 
-export default function Navabar({ isOpen, setIsOpen }) {
+export default function Navabar({ isOpen, setIsSearchOpen }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
@@ -18,8 +21,12 @@ export default function Navabar({ isOpen, setIsOpen }) {
   };
 
   const handleSearch = () => {
-    setIsOpen(!isOpen);
+    setIsSearchOpen(!isOpen);
   };
+
+  // const handle = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
   const handleGoHome = () => {
     localStorage.setItem("selectedCategory", "all");
@@ -45,12 +52,18 @@ export default function Navabar({ isOpen, setIsOpen }) {
               </li>
               <li className="nav-button-list">
                 <button className="btn" onClick={onLogout}>
-                  <FaSignOutAlt /> Logout
+                  <CiLogout />
+                  Logout
                 </button>
               </li>
               <button className="search-button" onClick={handleSearch}>
-                search
+                <CiSearch /> search
               </button>
+              <li className="nav-button-list">
+                <button className="btn">
+                  <PiShoppingCartSimpleLight /> Cart
+                </button>
+              </li>
             </>
           ) : (
             <>
@@ -65,8 +78,14 @@ export default function Navabar({ isOpen, setIsOpen }) {
                 </NavLink>
               </li>
               <button className="search-button" onClick={handleSearch}>
+                <CiSearch />
                 search
               </button>
+              <li className="nav-button-list">
+                <button className="btn">
+                  <PiShoppingCartSimpleLight /> Cart
+                </button>
+              </li>
             </>
           )}
         </ul>

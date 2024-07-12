@@ -6,6 +6,8 @@ function Account({
   currentComponent,
   setSelectedProduct,
   setRecentlyViewed,
+  isSearchOpen,
+  setIsSearchOpen,
 }) {
   return (
     <div className="recently-viewed-container">

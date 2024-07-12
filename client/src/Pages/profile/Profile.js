@@ -7,6 +7,7 @@ import Contact from "../../Components/contact/Contact";
 import OrderHistory from "../../Components/orderHistory/OrderHistory";
 import PaymentDetails from "../../Components/paymentDetails/PaymentDetails";
 import Wishlist from "../../Components/wishlist/Wishlist";
+import SearchModal from "../../Components/searchModal/SearchModal";
 const { useState } = require("react");
 
 function Profile({
@@ -14,6 +15,8 @@ function Profile({
   wishlist,
   setSelectedProduct,
   setRecentlyViewed,
+  isSearchOpen,
+  setIsSearchOpen,
 }) {
   const userData = JSON.parse(localStorage.getItem("user"));
   const [isAddCard, setIsAddCard] = useState(false);
@@ -70,6 +73,12 @@ function Profile({
         <section className="details-container">
           {components[currentComponent]}
         </section>
+      </div>
+      <div>
+        <SearchModal
+          isSearchOpen={isSearchOpen}
+          setIsSearchOpen={setIsSearchOpen}
+        />
       </div>
     </div>
   );

@@ -9,8 +9,9 @@ import {
   reset as paymentReset,
 } from "../../features/payments/paymentSlice";
 import Spinner from "../../Components/navbar/spinner/spinner";
+import SearchModal from "../../Components/searchModal/SearchModal";
 
-function Register() {
+function Register({ isSearchOpen, setIsSearchOpen }) {
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -191,6 +192,12 @@ function Register() {
           Submit
         </button>
       </form>
+      <div>
+        <SearchModal
+          isSearchOpen={isSearchOpen}
+          setIsSearchOpen={setIsSearchOpen}
+        />
+      </div>
     </div>
   );
 }

@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { login, reset } from "../../features/auth/authSlice";
 import Spinner from "../../Components/navbar/spinner/spinner";
+import SearchModal from "../../Components/searchModal/SearchModal";
 
-function Login() {
+function Login({ isSearchOpen, setIsSearchOpen }) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -88,6 +89,12 @@ function Login() {
           Login
         </button>
       </form>
+      <div>
+        <SearchModal
+          isSearchOpen={isSearchOpen}
+          setIsSearchOpen={setIsSearchOpen}
+        />
+      </div>
     </div>
   );
 }

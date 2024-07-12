@@ -1,13 +1,15 @@
 import "./searchModal.css";
 import { IoMdClose } from "react-icons/io";
 
-function SearchModal({ isOpen, setIsOpen }) {
+function SearchModal({ isSearchOpen, setIsSearchOpen }) {
   const handleSearch = () => {
-    setIsOpen(!isOpen);
+    setIsSearchOpen(!isSearchOpen);
   };
 
   return (
-    <div className={`search-modal-container ${isOpen ? "open" : "close"}`}>
+    <div
+      className={`search-modal-container ${isSearchOpen ? "open" : "close"}`}
+    >
       <div className="x-button-container">
         <IoMdClose onClick={handleSearch} className="x-button" />
       </div>

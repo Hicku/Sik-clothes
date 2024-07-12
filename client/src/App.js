@@ -15,7 +15,7 @@ import "./App.css";
 
 function App() {
   // Used to toggle the search sidebar
-  const [isOpen, setIsOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   // Used to store the selected product and display on product page
   const [selectedProduct, setSelectedProduct] = useState({});
   // Used to store the recently viewed products. Gets local storage data to persist the data, else empty array
@@ -45,7 +45,10 @@ function App() {
         <div className="App">
           <section className="header-container">
             <header className="header">
-              <Navabar isOpen={isOpen} setIsOpen={setIsOpen} />
+              <Navabar
+                isSearchOpen={isSearchOpen}
+                setIsSearchOpen={setIsSearchOpen}
+              />
             </header>
           </section>
           <section className="main-container">
@@ -55,8 +58,8 @@ function App() {
                   path="/profile"
                   element={
                     <Profile
-                      isOpen={isOpen}
-                      setIsOpen={setIsOpen}
+                      isSearchOpen={isSearchOpen}
+                      setIsSearchOpen={setIsSearchOpen}
                       recentlyViewed={recentlyViewed}
                       wishlist={wishlist}
                       setSelectedProduct={setSelectedProduct}
@@ -68,8 +71,8 @@ function App() {
                   path="/"
                   element={
                     <Homepage
-                      isOpen={isOpen}
-                      setIsOpen={setIsOpen}
+                      isSearchOpen={isSearchOpen}
+                      setIsSearchOpen={setIsSearchOpen}
                       setSelectedProduct={setSelectedProduct}
                       setRecentlyViewed={setRecentlyViewed}
                     />
@@ -77,18 +80,28 @@ function App() {
                 />
                 <Route
                   path="/login"
-                  element={<Login isOpen={isOpen} setIsOpen={setIsOpen} />}
+                  element={
+                    <Login
+                      isSearchOpen={isSearchOpen}
+                      setIsSearchOpen={setIsSearchOpen}
+                    />
+                  }
                 />
                 <Route
                   path="/register"
-                  element={<Register isOpen={isOpen} setIsOpen={setIsOpen} />}
+                  element={
+                    <Register
+                      isSearchOpen={isSearchOpen}
+                      setIsSearchOpen={setIsSearchOpen}
+                    />
+                  }
                 />
                 <Route
                   path="/product"
                   element={
                     <ProductPage
-                      isOpen={isOpen}
-                      setIsOpen={setIsOpen}
+                      isSearchOpen={isSearchOpen}
+                      setIsSearchOpen={setIsSearchOpen}
                       selectedProduct={selectedProduct}
                       setWishlist={setWishlist}
                     />

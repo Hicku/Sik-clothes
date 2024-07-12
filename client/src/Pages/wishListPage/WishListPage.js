@@ -1,8 +1,9 @@
 import Product from "../../Components/productCard/Product";
 import "./wishListPage.css";
 // import SearchModal from "../../Components/searchModal/SearchModal";
+import SearchModal from "../../Components/searchModal/SearchModal";
 
-function WishListPage({ wishlist }) {
+function WishListPage({ wishlist, isSearchOpen, setIsSearchOpen }) {
   return (
     <div className="wishlist-page-container">
       <h1>Wish List</h1>
@@ -13,6 +14,12 @@ function WishListPage({ wishlist }) {
           </li>
         ))}
       </ul>
+      <div>
+        <SearchModal
+          isSearchOpen={isSearchOpen}
+          setIsSearchOpen={setIsSearchOpen}
+        />
+      </div>
     </div>
   );
 }

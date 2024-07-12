@@ -5,10 +5,11 @@ import { getProducts, reset } from "../../features/products/productSlice";
 import Product from "../../Components/productCard/Product";
 import "./homepage.css";
 import SearchModal from "../../Components/searchModal/SearchModal";
+import CartModal from "../../Components/cartModal/CartModal";
 
 function Homepage({
-  isOpen,
-  setIsOpen,
+  isSearchOpen,
+  setIsSearchOpen,
   setSelectedProduct,
   setRecentlyViewed,
 }) {
@@ -66,7 +67,13 @@ function Homepage({
               )}
             </div>
             <div>
-              <SearchModal isOpen={isOpen} setIsOpen={setIsOpen} />
+              <SearchModal
+                isSearchOpen={isSearchOpen}
+                setIsSearchOpen={setIsSearchOpen}
+              />
+            </div>
+            <div>
+              <CartModal />
             </div>
           </div>
         </section>

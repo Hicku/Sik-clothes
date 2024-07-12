@@ -1,10 +1,15 @@
 import React from "react";
 import "./productPage.css";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addToCart, reset } from "../../features/cart/cartSlice";
 
 function ProductPage({ isOpen, setIsOpen, selectedProduct, setWishlist }) {
   const addToWishlist = () => {
     setWishlist((prev) => [...prev, selectedProduct]);
   };
+
+  const handleAddToCart = () => {};
 
   return (
     <div className="product-page-container">
