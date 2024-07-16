@@ -1,7 +1,6 @@
 import { FaSignInAlt, FaUser } from "react-icons/fa";
 import { CiLogout, CiSearch } from "react-icons/ci";
 import { PiShoppingCartSimpleLight } from "react-icons/pi";
-
 import { NavLink, useNavigate } from "react-router-dom";
 import "./nav.css";
 import { useSelector, useDispatch } from "react-redux";

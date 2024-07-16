@@ -26,7 +26,6 @@ function Homepage({
     }
 
     const selectedCategory = localStorage.getItem("selectedCategory");
-    console.log(selectedCategory);
 
     if (selectedCategory !== "all") {
       return;
